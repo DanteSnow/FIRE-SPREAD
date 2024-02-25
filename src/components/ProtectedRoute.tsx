@@ -9,19 +9,22 @@ export default function ProtectedRoute({
   children: React.ReactNode;
 }) {
   const [isLogin, setIsLogin] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user !== null) {
+      if (user) {
         setIsLogin(true);
       }
+      setIsLoading(false);
     });
+
     return () => {
       unsubscribe();
     };
   }, []);
 
-  if (!isLogin) {
+  if (!isLogin && !isLoading) {
     return <Navigate to="/signin" />;
   }
 
