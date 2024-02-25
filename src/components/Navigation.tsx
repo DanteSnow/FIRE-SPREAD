@@ -34,7 +34,6 @@ export default function Navigation() {
           <span>로그인</span>
         </Link>
       )}
-
       <Outlet />
     </nav>
   );

@@ -51,7 +51,7 @@ export default function SignUpPage() {
 
   return (
     <>
-      <header>
+      <div>
         <Link to="/">
           <h1>🔥FIRE SPREAD🔥</h1>
         </Link>
@@ -62,8 +62,8 @@ export default function SignUpPage() {
             <span>로그인</span>
           </Link>
         </span>
-      </header>
-      <section>
+      </div>
+      <div>
         <form onSubmit={onSubmit}>
           <input
             onChange={onChange}
@@ -92,7 +92,7 @@ export default function SignUpPage() {
           <input type="submit" value={isLoading ? "로딩중.." : "회원가입"} />
         </form>
         {error !== "" ? <span>{error}</span> : null}
-      </section>
+      </div>
     </>
   );
 }
