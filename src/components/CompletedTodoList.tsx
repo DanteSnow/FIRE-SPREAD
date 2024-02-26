@@ -4,9 +4,10 @@ import {
   onSnapshot,
   orderBy,
   query,
+  where,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
 import CompletedTodo from "./CompletedTodo";
 import { Unsubscribe } from "firebase/auth";
 
@@ -25,30 +26,35 @@ export default function CompletedTodoList() {
 
   useEffect(() => {
     let unsubscribe: Unsubscribe | null = null;
-    const fetchTodo = async () => {
-      const todoQuery = query(
-        collection(db, "todo"),
-        orderBy("createdAt", "desc"),
-        limit(10),
-      );
-      unsubscribe = await onSnapshot(todoQuery, (snapshot) => {
-        const todos = snapshot.docs.map((doc) => {
-          const { createdAt, todo, userId, username, complete, completedAt } =
-            doc.data();
-          return {
-            createdAt,
-            todo,
-            userId,
-            username,
-            complete,
-            completedAt,
-            id: doc.id,
-          };
+    const user = auth.currentUser;
+    if (user) {
+      const fetchTodo = async () => {
+        const todoQuery = query(
+          collection(db, "todo"),
+          where("userId", "==", user.uid),
+          orderBy("createdAt", "desc"),
+          limit(10),
+        );
+        unsubscribe = await onSnapshot(todoQuery, (snapshot) => {
+          const todos = snapshot.docs.map((doc) => {
+            const { createdAt, todo, userId, username, complete, completedAt } =
+              doc.data();
+            return {
+              createdAt,
+              todo,
+              userId,
+              username,
+              complete,
+              completedAt,
+              id: doc.id,
+            };
+          });
+          setTodos(todos);
         });
-        setTodos(todos);
-      });
-    };
-    fetchTodo();
+      };
+      fetchTodo();
+    }
+
     return () => {
       unsubscribe && unsubscribe();
     };

@@ -1,35 +1,54 @@
 import { useEffect, useState } from "react";
 import { ITodo } from "./TodayTodoList";
 import { Unsubscribe } from "firebase/auth";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { db } from "../firebase";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
+import { auth, db } from "../firebase";
 
 export default function CompletedTodoListSection() {
   const [todos, setTodos] = useState<ITodo[]>([]);
 
   useEffect(() => {
     let unsubscribe: Unsubscribe | null = null;
-    unsubscribe = onSnapshot(
-      query(collection(db, "todo"), orderBy("createdAt", "desc")),
-      (snapshot) => {
-        const fetchedTodos = snapshot.docs
-          .map((doc) => {
-            const { createdAt, todo, userId, username, complete, completedAt } =
-              doc.data();
-            return {
-              createdAt,
-              todo,
-              userId,
-              username,
-              complete,
-              completedAt,
-              id: doc.id,
-            };
-          })
-          .filter((todo) => todo.completedAt !== null);
-        setTodos(fetchedTodos);
-      },
-    );
+    const user = auth.currentUser;
+    if (user) {
+      unsubscribe = onSnapshot(
+        query(
+          collection(db, "todo"),
+          where("userId", "==", user.uid),
+          orderBy("createdAt", "desc"),
+        ),
+        (snapshot) => {
+          const fetchedTodos = snapshot.docs
+            .map((doc) => {
+              const {
+                createdAt,
+                todo,
+                userId,
+                username,
+                complete,
+                completedAt,
+              } = doc.data();
+              return {
+                createdAt,
+                todo,
+                userId,
+                username,
+                complete,
+                completedAt,
+                id: doc.id,
+              };
+            })
+            .filter((todo) => todo.completedAt !== null);
+          setTodos(fetchedTodos);
+        },
+      );
+    }
 
     return () => {
       unsubscribe && unsubscribe();
