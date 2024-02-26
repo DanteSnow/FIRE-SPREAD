@@ -37,7 +37,6 @@ export default function SignUpPage() {
         email,
         password,
       );
-      console.log(credentials.user);
       await updateProfile(credentials.user, { displayName: name });
       navigate("/");
     } catch (error) {
