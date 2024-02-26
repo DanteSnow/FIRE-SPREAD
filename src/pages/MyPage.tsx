@@ -1,5 +1,6 @@
-import CompleteTodoList from "../components/CompleteTodoList";
+import CompletedTodoList from "../components/CompletedTodoList";
 import PostTodoForm from "../components/PostTodoForm";
+import ReadOnlyCompletedTodoList from "../components/ReadOnlyCompletedTodoList";
 import TodayTodoList from "../components/TodayTodoList";
 
 export default function MyPage() {
@@ -23,13 +24,13 @@ export default function MyPage() {
           <PostTodoForm />
         </div>
         <div>
-          <CompleteTodoList />
+          <CompletedTodoList />
         </div>
       </div>
 
       <div>-</div>
       <div>
-        <h1>투두 완료 리스트 섹션입니다</h1>
+        <ReadOnlyCompletedTodoList />
       </div>
       <div>-</div>
       <div>

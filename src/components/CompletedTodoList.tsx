@@ -7,7 +7,7 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
-import TodayTodo from "./TodayTodo";
+import CompletedTodo from "./CompletedTodo";
 import { Unsubscribe } from "firebase/auth";
 
 export interface ITodo {
@@ -19,7 +19,7 @@ export interface ITodo {
   complete: boolean;
 }
 
-export default function TodayTodoList() {
+export default function CompletedTodoList() {
   const [todos, setTodos] = useState<ITodo[]>([]);
 
   useEffect(() => {
@@ -45,10 +45,10 @@ export default function TodayTodoList() {
   }, []);
 
   return (
-    <div>
+    <h1>
       {todos.map((todo) => (
-        <TodayTodo key={todo.id} {...todo} />
+        <CompletedTodo key={todo.id} {...todo} />
       ))}
-    </div>
+    </h1>
   );
 }

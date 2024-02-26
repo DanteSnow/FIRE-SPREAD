@@ -2,7 +2,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { ITodo } from "./TodayTodoList";
 
-export default function ComoleteTodo({ todo, complete, userId, id }: ITodo) {
+export default function CompletedTodo({ todo, complete, userId, id }: ITodo) {
   const user = auth.currentUser;
 
   const onCompleteCancel = async () => {

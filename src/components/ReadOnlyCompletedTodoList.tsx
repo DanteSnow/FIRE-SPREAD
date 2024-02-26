@@ -7,20 +7,23 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
-import CompleteTodo from "./CompleteTodo";
 import { Unsubscribe } from "firebase/auth";
+import ReadOnlyCompletedTodo from "./ReadOnlyCompletedTodo";
 
 export interface ITodo {
   id: string;
-  createdAt: number;
+  createdAt: string;
   todo: string;
   userId: string;
   username: string;
   complete: boolean;
 }
 
-export default function CompleteTodoList() {
+export default function ReadOnlyCompletedTodoList() {
   const [todos, setTodos] = useState<ITodo[]>([]);
+  const nowDate = Date.now();
+  const now = new Date(nowDate);
+  const date = now.toLocaleDateString("ko-KR");
 
   useEffect(() => {
     let unsubscribe: Unsubscribe | null = null;
@@ -46,8 +49,9 @@ export default function CompleteTodoList() {
 
   return (
     <h1>
+      {date}
       {todos.map((todo) => (
-        <CompleteTodo key={todo.id} {...todo} />
+        <ReadOnlyCompletedTodo key={todo.id} {...todo} />
       ))}
     </h1>
   );

@@ -13,13 +13,16 @@ export default function PostTodoForm() {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const user = auth.currentUser;
+    const nowDate = Date.now();
+    const now = new Date(nowDate);
+    const date = now.toLocaleDateString("ko-KR");
     if (!user || isLoading || todo === "") return;
     try {
       setIsLoading(true);
       await addDoc(collection(db, "todo"), {
         todo,
         complete: false,
-        createdAt: Date.now(),
+        createdAt: date,
         username: user.displayName,
         userId: user.uid,
       });
