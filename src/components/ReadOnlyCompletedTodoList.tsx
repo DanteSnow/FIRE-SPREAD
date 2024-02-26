@@ -17,13 +17,11 @@ export interface ITodo {
   userId: string;
   username: string;
   complete: boolean;
+  completedAt: string;
 }
 
 export default function ReadOnlyCompletedTodoList() {
   const [todos, setTodos] = useState<ITodo[]>([]);
-  const nowDate = Date.now();
-  const now = new Date(nowDate);
-  const date = now.toLocaleDateString("ko-KR");
 
   useEffect(() => {
     let unsubscribe: Unsubscribe | null = null;
@@ -35,8 +33,17 @@ export default function ReadOnlyCompletedTodoList() {
       );
       unsubscribe = await onSnapshot(todoQuery, (snapshot) => {
         const todos = snapshot.docs.map((doc) => {
-          const { createdAt, todo, userId, username, complete } = doc.data();
-          return { createdAt, todo, userId, username, complete, id: doc.id };
+          const { createdAt, todo, userId, username, complete, completedAt } =
+            doc.data();
+          return {
+            createdAt,
+            todo,
+            userId,
+            username,
+            complete,
+            completedAt,
+            id: doc.id,
+          };
         });
         setTodos(todos);
       });
@@ -49,7 +56,6 @@ export default function ReadOnlyCompletedTodoList() {
 
   return (
     <h1>
-      {date}
       {todos.map((todo) => (
         <ReadOnlyCompletedTodo key={todo.id} {...todo} />
       ))}

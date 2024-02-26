@@ -17,6 +17,7 @@ export interface ITodo {
   userId: string;
   username: string;
   complete: boolean;
+  completedAt: string;
 }
 
 export default function CompletedTodoList() {
@@ -32,8 +33,17 @@ export default function CompletedTodoList() {
       );
       unsubscribe = await onSnapshot(todoQuery, (snapshot) => {
         const todos = snapshot.docs.map((doc) => {
-          const { createdAt, todo, userId, username, complete } = doc.data();
-          return { createdAt, todo, userId, username, complete, id: doc.id };
+          const { createdAt, todo, userId, username, complete, completedAt } =
+            doc.data();
+          return {
+            createdAt,
+            todo,
+            userId,
+            username,
+            complete,
+            completedAt,
+            id: doc.id,
+          };
         });
         setTodos(todos);
       });

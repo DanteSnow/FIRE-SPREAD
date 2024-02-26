@@ -1,6 +1,6 @@
 import CompletedTodoList from "../components/CompletedTodoList";
+import CompletedTodoListSection from "../components/CompletedTodoListSection";
 import PostTodoForm from "../components/PostTodoForm";
-import ReadOnlyCompletedTodoList from "../components/ReadOnlyCompletedTodoList";
 import TodayTodoList from "../components/TodayTodoList";
 
 export default function MyPage() {
@@ -27,12 +27,7 @@ export default function MyPage() {
           <CompletedTodoList />
         </div>
       </div>
-
-      <div>-</div>
-      <div>
-        <ReadOnlyCompletedTodoList />
-      </div>
-      <div>-</div>
+      <CompletedTodoListSection />
       <div>
         <h1>읽기 전용 방명록 섹션입니다</h1>
       </div>
