@@ -23,7 +23,7 @@ export default function TodayTodo({ todo, complete, userId, id }: ITodo) {
     return (
       <>
         {user?.uid === userId ? (
-          <button onClick={onCompleted}>완료</button>
+          <button onClick={onCompleted}>-버튼-</button>
         ) : null}
         <div>{todo}</div>
       </>
