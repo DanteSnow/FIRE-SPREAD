@@ -6,11 +6,14 @@ export default function TodayTodo({ todo, complete, userId, id }: ITodo) {
   const user = auth.currentUser;
 
   const onCompleted = async () => {
+    const nowDate = Date.now();
+    const now = new Date(nowDate);
+    const date = now.toLocaleDateString("ko-KR");
     if (user?.uid !== userId) return;
     try {
       await updateDoc(doc(db, "todo", id), {
         complete: true,
-        completedAt: Date.now(),
+        completedAt: date,
       });
     } catch (error) {
       console.error(error);
