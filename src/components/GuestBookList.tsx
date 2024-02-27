@@ -1,7 +1,12 @@
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { db } from "../firebase";
-import { Unsubscribe } from "firebase/auth";
+import { auth, db } from "../firebase";
 import GuestBook from "./GuestBook";
 
 export interface IGuestBook {
@@ -15,35 +20,35 @@ export interface IGuestBook {
 
 export default function GuestBookList() {
   const [guestBooks, setGuestBooks] = useState<IGuestBook[]>([]);
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
 
   useEffect(() => {
-    let unsubscribe: Unsubscribe | null = null;
-    const fetchTodo = async () => {
-      const guestBookQuery = query(
-        collection(db, "guestBook"),
-        orderBy("createdAt", "desc"),
-      );
-      unsubscribe = onSnapshot(guestBookQuery, (snapshot) => {
-        const guestBooks = snapshot.docs.map((doc) => {
-          const { createdAt, guestBook, userId, username, receivedUserId } =
-            doc.data();
-          return {
-            createdAt,
-            guestBook,
-            userId,
-            username,
-            id: doc.id,
-            receivedUserId,
-          };
-        });
-        setGuestBooks(guestBooks);
-      });
-    };
-    fetchTodo();
+    const unsubscribeAuth = auth.onAuthStateChanged((user) => {
+      setCurrentUserId(user ? user.uid : null);
+    });
     return () => {
-      unsubscribe && unsubscribe();
+      unsubscribeAuth && unsubscribeAuth();
     };
   }, []);
+
+  useEffect(() => {
+    if (currentUserId) {
+      const guestBookQuery = query(
+        collection(db, "guestBook"),
+        where("receivedUserId", "==", currentUserId),
+        orderBy("createdAt", "desc"),
+      );
+      const unsubscribeFirestore = onSnapshot(guestBookQuery, (snapshot) => {
+        const fetchedGuestBooks = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as IGuestBook[];
+        setGuestBooks(fetchedGuestBooks);
+      });
+
+      return () => unsubscribeFirestore();
+    }
+  }, [currentUserId]);
 
   return (
     <div>
