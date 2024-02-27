@@ -13,8 +13,9 @@ export interface IGuestBook {
   receivedUserId: string;
 }
 
-export default function GuestBookList() {
+export default function UserGuestBookList({ userId }: { userId: string }) {
   const [guestBooks, setGuestBooks] = useState<IGuestBook[]>([]);
+  const [receivedUserId, setReceivedUserId] = useState<string>("");
 
   useEffect(() => {
     let unsubscribe: Unsubscribe | null = null;
@@ -37,19 +38,22 @@ export default function GuestBookList() {
           };
         });
         setGuestBooks(guestBooks);
+        setReceivedUserId(receivedUserId);
       });
     };
     fetchTodo();
     return () => {
       unsubscribe && unsubscribe();
     };
-  }, []);
+  }, [receivedUserId]);
 
   return (
     <div>
-      {guestBooks.map((guestBook) => (
-        <GuestBook key={guestBook.id} {...guestBook} />
-      ))}
+      {guestBooks
+        .filter((guestBook) => guestBook.receivedUserId === userId)
+        .map((filteredGuestBook) => (
+          <GuestBook key={filteredGuestBook.id} {...filteredGuestBook} />
+        ))}
     </div>
   );
 }

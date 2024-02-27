@@ -4,6 +4,12 @@ import { useEffect, useState } from "react";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { ITodo } from "../components/HomeCompletedTodoListSection";
 import UserTodayTodo from "../components/UserTodayTodo";
+import PostGuestBookForm from "../components/PostGuestBookForm";
+import UserGuestBookList from "../components/UserGuestBookList";
+
+export interface IUserProps {
+  userId: string;
+}
 
 export default function UserPage() {
   const { userId } = useParams();
@@ -81,6 +87,8 @@ export default function UserPage() {
         </div>
       ))}
       <div>-</div>
+      <UserGuestBookList userId={userId as string} />
+      <PostGuestBookForm userId={userId as string} />
     </>
   );
 }

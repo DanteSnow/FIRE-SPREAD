@@ -2,7 +2,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { auth, db } from "../firebase";
 
-export default function PostGuestBookForm() {
+export default function PostGuestBookForm({ userId }: { userId: string }) {
   const [guestBook, setGuestBook] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -21,6 +21,7 @@ export default function PostGuestBookForm() {
         createdAt: Date.now(),
         username: user.displayName,
         userId: user.uid,
+        receivedUserId: userId,
       });
     } catch (error) {
       console.error(error);
