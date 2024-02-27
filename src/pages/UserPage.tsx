@@ -1,3 +1,6 @@
+import { useParams } from "react-router-dom";
+
 export default function UserPage() {
-  return <h1>유저 페이지입니다</h1>;
+  const { userId } = useParams();
+  return <h1>{userId} 님의 페이지입니다</h1>;
 }

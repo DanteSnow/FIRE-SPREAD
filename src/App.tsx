@@ -23,7 +23,7 @@ export default function App() {
             }
           />
           <Route
-            path="/userpage"
+            path="/userpage/:userId"
             element={
               <ProtectedRoute>
                 <UserPage />
