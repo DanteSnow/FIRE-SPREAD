@@ -7,10 +7,6 @@ import UserTodayTodo from "../components/UserTodayTodo";
 import PostGuestBookForm from "../components/PostGuestBookForm";
 import UserGuestBookList from "../components/UserGuestBookList";
 
-export interface IUserProps {
-  userId: string;
-}
-
 export default function UserPage() {
   const { userId } = useParams();
   const navigate = useNavigate();
@@ -50,7 +46,7 @@ export default function UserPage() {
       unsubscribe && unsubscribe();
       unsubscribeFirestore && unsubscribeFirestore();
     };
-  }, []);
+  }, [navigate, userId]);
 
   const groupedTodos = todos.reduce(
     (acc: Record<string, ITodo[]>, todo) => {
