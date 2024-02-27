@@ -8,6 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { Unsubscribe } from "firebase/auth";
+import { Link } from "react-router-dom";
 
 export interface ITodo {
   id: string;
@@ -69,12 +70,14 @@ export default function HomeCompletedTodoList() {
   return (
     <>
       {Object.entries(groupedTodos).map(([name, todosForName]) => (
-        <div key={name}>
-          <h3>{name}</h3>
-          {todosForName.map((todo) => (
-            <div key={todo.id}>{todo.todo}</div>
-          ))}
-        </div>
+        <Link to={`/userpage/${todosForName[0].userId}`} key={name}>
+          <div key={name}>
+            <h3>{name}</h3>
+            {todosForName.map((todo) => (
+              <div key={todo.id}>{todo.todo}</div>
+            ))}
+          </div>
+        </Link>
       ))}
     </>
   );
