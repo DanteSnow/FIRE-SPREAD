@@ -6,7 +6,7 @@ export default function HomePage() {
     <>
       <br />
       <div>-</div>
-      <h1>오늘의 투두리스트 현황</h1>
+      <h1>모두의 투두리스트 현황</h1>
       <HomeTodayTodoList />
       <div>-</div>
       <br />

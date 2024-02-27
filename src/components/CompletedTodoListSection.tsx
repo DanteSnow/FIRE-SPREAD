@@ -3,7 +3,6 @@ import { ITodo } from "./TodayTodoList";
 import { onAuthStateChanged } from "firebase/auth";
 import {
   collection,
-  limit,
   onSnapshot,
   orderBy,
   query,
@@ -21,7 +20,6 @@ export default function CompletedTodoListSection() {
           collection(db, "todo"),
           where("userId", "==", user.uid),
           orderBy("createdAt", "desc"),
-          limit(10),
         );
         return onSnapshot(todoQuery, (snapshot) => {
           const fetchedTodos = snapshot.docs

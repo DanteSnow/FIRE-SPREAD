@@ -1,10 +1,4 @@
-import {
-  collection,
-  limit,
-  onSnapshot,
-  orderBy,
-  query,
-} from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { Unsubscribe } from "firebase/auth";
@@ -27,7 +21,6 @@ export default function GuestBookList() {
       const guestBookQuery = query(
         collection(db, "guestBook"),
         orderBy("createdAt", "desc"),
-        limit(10),
       );
       unsubscribe = await onSnapshot(guestBookQuery, (snapshot) => {
         const guestBooks = snapshot.docs.map((doc) => {
