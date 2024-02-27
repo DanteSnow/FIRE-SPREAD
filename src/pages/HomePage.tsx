@@ -1,3 +1,4 @@
+import HomeCompletedTodoListSection from "../components/HomeCompletedTodoListSection";
 import HomeTodayTodoList from "../components/HomeTodayTodoList";
 
 export default function HomePage() {
@@ -10,7 +11,8 @@ export default function HomePage() {
       <div>-</div>
       <br />
       <div>-</div>
-      <div>여기는 모두의 투두 완료 공유 공간</div>
+      <h1>모두의 투두 완료 현황</h1>
+      <HomeCompletedTodoListSection />
       <div>-</div>
     </>
   );

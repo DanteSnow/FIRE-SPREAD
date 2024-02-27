@@ -1,36 +1,53 @@
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { ITodo } from "./TodayTodoList";
-import { Unsubscribe } from "firebase/auth";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../firebase";
+import { Unsubscribe } from "firebase/auth";
 
-export default function HomeCompletedTodoListSection() {
+export interface ITodo {
+  id: string;
+  createdAt: string;
+  todo: string;
+  userId: string;
+  username: string;
+  complete: boolean;
+  completedAt: string;
+}
+
+export default function HomeCompletedTodoList() {
   const [todos, setTodos] = useState<ITodo[]>([]);
 
   useEffect(() => {
     let unsubscribe: Unsubscribe | null = null;
-    unsubscribe = onSnapshot(
-      query(collection(db, "todo"), orderBy("createdAt", "desc")),
-      (snapshot) => {
-        const fetchedTodos = snapshot.docs
-          .map((doc) => {
-            const { createdAt, todo, userId, username, complete, completedAt } =
-              doc.data();
-            return {
-              createdAt,
-              todo,
-              userId,
-              username,
-              complete,
-              completedAt,
-              id: doc.id,
-            };
-          })
-          .filter((todo) => todo.completedAt !== null);
+    const fetchTodo = async () => {
+      const todoQuery = query(
+        collection(db, "todo"),
+        where("complete", "==", true),
+        orderBy("completedAt", "desc"),
+      );
+      unsubscribe = onSnapshot(todoQuery, (snapshot) => {
+        const fetchedTodos = snapshot.docs.map((doc) => {
+          const { createdAt, todo, userId, username, complete, completedAt } =
+            doc.data();
+          return {
+            createdAt,
+            todo,
+            userId,
+            username,
+            complete,
+            completedAt,
+            id: doc.id,
+          };
+        });
         setTodos(fetchedTodos);
-      },
-    );
-
+      });
+    };
+    fetchTodo();
     return () => {
       unsubscribe && unsubscribe();
     };
@@ -38,11 +55,11 @@ export default function HomeCompletedTodoListSection() {
 
   const groupedTodos = todos.reduce(
     (acc: Record<string, ITodo[]>, todo) => {
-      if (todo.completedAt) {
-        if (!acc[todo.completedAt]) {
-          acc[todo.completedAt] = [];
+      if (todo.username) {
+        if (!acc[todo.username]) {
+          acc[todo.username] = [];
         }
-        acc[todo.completedAt].push(todo);
+        acc[todo.username].push(todo);
       }
       return acc;
     },
@@ -51,10 +68,10 @@ export default function HomeCompletedTodoListSection() {
 
   return (
     <>
-      {Object.entries(groupedTodos).map(([date, todosForDate]) => (
-        <div key={date}>
-          <h3>{date}</h3>
-          {todosForDate.map((todo) => (
+      {Object.entries(groupedTodos).map(([name, todosForName]) => (
+        <div key={name}>
+          <h3>{name}</h3>
+          {todosForName.map((todo) => (
             <div key={todo.id}>{todo.todo}</div>
           ))}
         </div>

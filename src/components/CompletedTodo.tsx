@@ -23,7 +23,7 @@ export default function CompletedTodo({ todo, complete, userId, id }: ITodo) {
     return (
       <>
         {user?.uid === userId ? (
-          <button onClick={onCompleteCancel}>-버튼-</button>
+          <button onClick={onCompleteCancel}>-완료취소버튼-</button>
         ) : null}
         <div>{todo}</div>
       </>
