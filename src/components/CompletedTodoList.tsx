@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 import CompletedTodo from "./CompletedTodo";
-import { Unsubscribe } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 
 export interface ITodo {
   id: string;
@@ -25,35 +25,25 @@ export default function CompletedTodoList() {
   const [todos, setTodos] = useState<ITodo[]>([]);
 
   useEffect(() => {
-    let unsubscribe: Unsubscribe | null = null;
-    const user = auth.currentUser;
-    if (user) {
-      const fetchTodo = async () => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
         const todoQuery = query(
           collection(db, "todo"),
           where("userId", "==", user.uid),
           orderBy("createdAt", "desc"),
           limit(10),
         );
-        unsubscribe = await onSnapshot(todoQuery, (snapshot) => {
-          const todos = snapshot.docs.map((doc) => {
-            const { createdAt, todo, userId, username, complete, completedAt } =
-              doc.data();
-            return {
-              createdAt,
-              todo,
-              userId,
-              username,
-              complete,
-              completedAt,
-              id: doc.id,
-            };
-          });
-          setTodos(todos);
+        return onSnapshot(todoQuery, (snapshot) => {
+          const fetchedTodos = snapshot.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          })) as ITodo[];
+          setTodos(fetchedTodos);
         });
-      };
-      fetchTodo();
-    }
+      } else {
+        setTodos([]);
+      }
+    });
 
     return () => {
       unsubscribe && unsubscribe();

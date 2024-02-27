@@ -45,7 +45,9 @@ export default function TodayTodoList() {
       }
     });
 
-    return () => unsubscribe();
+    return () => {
+      unsubscribe && unsubscribe();
+    };
   }, []);
 
   return (

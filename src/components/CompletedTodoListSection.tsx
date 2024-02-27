@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { ITodo } from "./TodayTodoList";
-import { Unsubscribe } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import {
   collection,
+  limit,
   onSnapshot,
   orderBy,
   query,
@@ -14,16 +15,15 @@ export default function CompletedTodoListSection() {
   const [todos, setTodos] = useState<ITodo[]>([]);
 
   useEffect(() => {
-    let unsubscribe: Unsubscribe | null = null;
-    const user = auth.currentUser;
-    if (user) {
-      unsubscribe = onSnapshot(
-        query(
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const todoQuery = query(
           collection(db, "todo"),
           where("userId", "==", user.uid),
           orderBy("createdAt", "desc"),
-        ),
-        (snapshot) => {
+          limit(10),
+        );
+        return onSnapshot(todoQuery, (snapshot) => {
           const fetchedTodos = snapshot.docs
             .map((doc) => {
               const {
@@ -46,9 +46,11 @@ export default function CompletedTodoListSection() {
             })
             .filter((todo) => todo.completedAt !== null);
           setTodos(fetchedTodos);
-        },
-      );
-    }
+        });
+      } else {
+        setTodos([]);
+      }
+    });
 
     return () => {
       unsubscribe && unsubscribe();
