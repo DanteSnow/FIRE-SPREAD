@@ -4,10 +4,10 @@ import {
   onSnapshot,
   orderBy,
   query,
+  where,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
-import TodayTodo from "./TodayTodo";
 import { Unsubscribe } from "firebase/auth";
 
 export interface ITodo {
@@ -28,11 +28,12 @@ export default function HomeTodayTodoList() {
     const fetchTodo = async () => {
       const todoQuery = query(
         collection(db, "todo"),
+        where("complete", "==", false),
         orderBy("createdAt", "desc"),
         limit(10),
       );
-      unsubscribe = await onSnapshot(todoQuery, (snapshot) => {
-        const todos = snapshot.docs.map((doc) => {
+      unsubscribe = onSnapshot(todoQuery, (snapshot) => {
+        const fetchedTodos = snapshot.docs.map((doc) => {
           const { createdAt, todo, userId, username, complete, completedAt } =
             doc.data();
           return {
@@ -45,7 +46,7 @@ export default function HomeTodayTodoList() {
             id: doc.id,
           };
         });
-        setTodos(todos);
+        setTodos(fetchedTodos);
       });
     };
     fetchTodo();
@@ -54,11 +55,29 @@ export default function HomeTodayTodoList() {
     };
   }, []);
 
+  const groupedTodos = todos.reduce(
+    (acc: Record<string, ITodo[]>, todo) => {
+      if (todo.username) {
+        if (!acc[todo.username]) {
+          acc[todo.username] = [];
+        }
+        acc[todo.username].push(todo);
+      }
+      return acc;
+    },
+    {} as Record<string, ITodo[]>,
+  );
+
   return (
-    <div>
-      {todos.map((todo) => (
-        <TodayTodo key={todo.id} {...todo} />
+    <>
+      {Object.entries(groupedTodos).map(([name, todosForName]) => (
+        <div key={name}>
+          <h3>{name}</h3>
+          {todosForName.map((todo) => (
+            <div key={todo.id}>{todo.todo}</div>
+          ))}
+        </div>
       ))}
-    </div>
+    </>
   );
 }

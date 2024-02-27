@@ -1,7 +1,6 @@
 import CompletedTodoList from "../components/CompletedTodoList";
 import CompletedTodoListSection from "../components/CompletedTodoListSection";
 import GuestBookList from "../components/GuestBookList";
-import PostGuestBookForm from "../components/PostGuestBookForm";
 import PostTodoForm from "../components/PostTodoForm";
 import TodayTodoList from "../components/TodayTodoList";
 
@@ -29,7 +28,6 @@ export default function MyPage() {
       <CompletedTodoListSection />
       <div>
         <GuestBookList />
-        <PostGuestBookForm />
       </div>
     </div>
   );
