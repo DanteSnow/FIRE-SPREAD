@@ -49,22 +49,17 @@ export default function SignUpPage() {
   };
 
   return (
-    <>
-      <div>
+    <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center gap-2   ">
+      <div className="flex flex-col items-center justify-center">
         <Link to="/">
           <h1>🔥FIRE SPREAD🔥</h1>
         </Link>
         <span>당신의 열정을 퍼뜨려보세요</span>
-        <span>
-          이미 계정이 있으신가요?
-          <Link to="/signin">
-            <span>로그인</span>
-          </Link>
-        </span>
       </div>
       <div>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className="flex flex-col gap-2">
           <input
+            className="rounded-xl border-2 bg-gray-100 p-3"
             onChange={onChange}
             name="name"
             placeholder="name"
@@ -73,6 +68,7 @@ export default function SignUpPage() {
             value={name}
           />
           <input
+            className="rounded-xl border-2 bg-gray-100 p-3"
             onChange={onChange}
             name="email"
             placeholder="email"
@@ -81,6 +77,7 @@ export default function SignUpPage() {
             value={email}
           />
           <input
+            className="rounded-xl border-2 bg-gray-100 p-3"
             onChange={onChange}
             name="password"
             placeholder="password"
@@ -88,10 +85,22 @@ export default function SignUpPage() {
             required
             value={password}
           />
-          <input type="submit" value={isLoading ? "로딩중.." : "회원가입"} />
+          <input
+            type="submit"
+            className="cursor-pointer rounded-xl border-2 bg-gray-200 px-3 text-gray-600"
+            value={isLoading ? "로딩중.." : "회원가입"}
+          />
         </form>
-        {error !== "" ? <span>{error}</span> : null}
+        <div className="flex flex-col items-center gap-2">
+          <span>
+            이미 계정이 있으신가요?
+            <Link to="/signin">
+              <span>로그인</span>
+            </Link>
+          </span>
+          <span>{error !== "" ? <span>{error}</span> : null}</span>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
