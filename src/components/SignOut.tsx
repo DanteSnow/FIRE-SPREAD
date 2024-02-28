@@ -10,5 +10,12 @@ export default function SignOut() {
       navigate("/");
     }
   };
-  return <h1 onClick={onSignOut}>로그아웃</h1>;
+  return (
+    <span
+      className="cursor-pointer rounded-xl bg-black p-3 text-white"
+      onClick={onSignOut}
+    >
+      로그아웃
+    </span>
+  );
 }

@@ -20,21 +20,39 @@ export default function Navigation() {
   }, []);
 
   return (
-    <nav>
-      <Link to="/">
-        <span> 홈 </span>
-      </Link>
-      <Link to="/mypage">
-        <span> 마이페이지 </span>
-      </Link>
-      {isLogin ? (
-        <SignOut />
-      ) : (
-        <Link to="/signin">
-          <span>로그인</span>
+    <>
+      <nav className="mb-10 flex justify-center gap-10 border-2 p-6">
+        <Link to="/">
+          <div>
+            <span className="cursor-pointer rounded-xl bg-black p-3 text-white">
+              {" "}
+              홈{" "}
+            </span>
+          </div>
         </Link>
-      )}
+        <Link to="/mypage">
+          <div>
+            <span className="cursor-pointer rounded-xl bg-black p-3 text-white">
+              {" "}
+              마이페이지{" "}
+            </span>
+          </div>
+        </Link>
+        {isLogin ? (
+          <div>
+            <SignOut />
+          </div>
+        ) : (
+          <Link to="/signin">
+            <div>
+              <span className="cursor-pointer rounded-xl bg-black p-3 text-white">
+                로그인
+              </span>
+            </div>
+          </Link>
+        )}
+      </nav>
       <Outlet />
-    </nav>
+    </>
   );
 }

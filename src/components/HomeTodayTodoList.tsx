@@ -71,8 +71,8 @@ export default function HomeTodayTodoList() {
     <>
       {Object.entries(groupedTodos).map(([name, todosForName]) => (
         <Link to={`/userpage/${todosForName[0].userId}`} key={name}>
-          <div>
-            <h3>{name}</h3>
+          <div className="flex flex-col border-2 p-2">
+            <h3 className="mb-2 font-bold">{name}</h3>
             {todosForName.map((todo) => (
               <div key={todo.id}>{todo.todo}</div>
             ))}
