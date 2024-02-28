@@ -6,29 +6,34 @@ import TodayTodoList from "../components/TodayTodoList";
 
 export default function MyPage() {
   return (
-    <div>
-      <div>-</div>
-      <div>
-        <h1>프로필 섹션입니다</h1>
-      </div>
-      <div>-</div>
+    <div className="flex flex-col gap-40">
+      <section>
+        <article>프로필</article>
+      </section>
 
-      <div>
-        <h1>투두 관리 섹션입니다</h1>
-        <div>
+      <section className="flex items-center justify-center gap-12">
+        <article>
           <TodayTodoList />
-        </div>
-        <div>
+        </article>
+        <article>
           <PostTodoForm />
-        </div>
-        <div>
+        </article>
+        <article>
           <CompletedTodoList />
+        </article>
+      </section>
+
+      <section>
+        <h1 className="mb-5 text-center text-3xl font-bold">완료한 일정들</h1>
+        <div className="mx-auto flex w-1/2 justify-center gap-10 rounded-xl border-2 border-black p-5">
+          <CompletedTodoListSection />
         </div>
-      </div>
-      <CompletedTodoListSection />
-      <div>
+      </section>
+
+      <section className="mx-auto flex w-1/2 flex-col">
+        <h1 className="mb-5 text-center text-3xl font-bold">방명록</h1>
         <GuestBookList />
-      </div>
+      </section>
     </div>
   );
 }

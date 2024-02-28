@@ -72,10 +72,12 @@ export default function CompletedTodoListSection() {
     <>
       {Object.entries(groupedTodos).map(([date, todosForDate]) => (
         <div key={date}>
-          <h3>{date}</h3>
-          {todosForDate.map((todo) => (
-            <div key={todo.id}>{todo.todo}</div>
-          ))}
+          <h3 className="pb-2 pl-2 text-xl font-bold">{date}</h3>
+          <div className="rounded-xl border-2 border-black p-5">
+            {todosForDate.map((todo) => (
+              <div key={todo.id}>{todo.todo}</div>
+            ))}
+          </div>
         </div>
       ))}
     </>

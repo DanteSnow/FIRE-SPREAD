@@ -30,16 +30,13 @@ export default function TodayTodo({
 
   if (!complete) {
     return (
-      <>
+      <div className="flex items-center gap-2">
         {user?.uid === userId ? (
-          <button onClick={onCompleted}>-일정완료버튼-</button>
+          <button onClick={onCompleted}>ㅇ</button>
         ) : null}
-        <div>{todo}</div>
-        <div>
-          <span>생성날짜</span>
-          {createdAt}
-        </div>
-      </>
+        <span className="text-lg font-bold">{todo}</span>
+        <span className="text-xs">{createdAt}</span>
+      </div>
     );
   }
 }

@@ -35,9 +35,18 @@ export default function PostTodoForm() {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <textarea placeholder="오늘의 할일은?" value={todo} onChange={onChange} />
-      <input type="submit" value="할일 등록하기" />
+    <form onSubmit={onSubmit} className="flex flex-col gap-5">
+      <textarea
+        className="rounded-xl border-2 border-black p-3"
+        placeholder="오늘의 할일은?"
+        value={todo}
+        onChange={onChange}
+      />
+      <input
+        className="rounded-xl border-2 border-black"
+        type="submit"
+        value="할일 등록하기"
+      />
     </form>
   );
 }

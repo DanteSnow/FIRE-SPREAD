@@ -16,7 +16,7 @@ export default function HomePage() {
         <h1 className="mb-3 flex justify-center text-xl font-bold">
           모두의 투두 완료 현황
         </h1>
-        <div className="flex justify-center gap-2 border-2 border-solid p-2">
+        <div className="flex justify-center gap-2 border-2 border-solid p-5">
           <HomeCompletedTodoListSection />
         </div>
       </article>
