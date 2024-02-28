@@ -6,9 +6,13 @@ import TodayTodoList from "../components/TodayTodoList";
 
 export default function MyPage() {
   return (
-    <div className="flex flex-col gap-40">
-      <section>
-        <article>프로필</article>
+    <div className="mt-32 flex flex-col gap-32">
+      <section className="mx-auto flex flex-col">
+        <article className="flex flex-col items-center">
+          <div>사진</div>
+          <span>이름</span>
+          <p>상태메시지</p>
+        </article>
       </section>
 
       <section className="flex flex-col items-center justify-center gap-12">

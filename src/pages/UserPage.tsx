@@ -61,9 +61,13 @@ export default function UserPage() {
   );
 
   return (
-    <div className="flex flex-col gap-40">
-      <section>
-        <div>{userName}님의 페이지 입니다.</div>
+    <div className="mt-32 flex flex-col gap-32">
+      <section className="mx-auto flex flex-col">
+        <article className="flex flex-col items-center">
+          <div>사진</div>
+          <span>{userName}</span>
+          <p>상태메시지</p>
+        </article>
       </section>
 
       <section>
