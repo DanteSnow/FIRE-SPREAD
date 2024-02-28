@@ -91,11 +91,11 @@ export default function SignUpPage() {
             value={isLoading ? "로딩중.." : "회원가입"}
           />
         </form>
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex flex-col items-center p-2">
           <span>
             이미 계정이 있으신가요?
             <Link to="/signin">
-              <span>로그인</span>
+              <span className="font-bold"> 로그인</span>
             </Link>
           </span>
           <span>{error !== "" ? <span>{error}</span> : null}</span>
