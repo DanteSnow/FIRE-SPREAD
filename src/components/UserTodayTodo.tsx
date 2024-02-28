@@ -3,13 +3,10 @@ import { ITodo } from "./TodayTodoList";
 export default function UserTodayTodo({ todo, complete, createdAt }: ITodo) {
   if (!complete) {
     return (
-      <>
-        <div>{todo}</div>
-        <div>
-          <span>생성날짜</span>
-          {createdAt}
-        </div>
-      </>
+      <div className="flex items-center gap-3">
+        <span className="text-lg font-bold">{todo}</span>
+        <span className="text-xs">{createdAt}</span>
+      </div>
     );
   }
 }

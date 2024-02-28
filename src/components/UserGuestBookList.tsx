@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { Unsubscribe } from "firebase/auth";
 import GuestBook from "./GuestBook";
+import PostGuestBookForm from "./PostGuestBookForm";
 
 export interface IGuestBook {
   id: string;
@@ -48,12 +49,13 @@ export default function UserGuestBookList({ userId }: { userId: string }) {
   }, [receivedUserId]);
 
   return (
-    <div>
+    <div className="flex w-full flex-col rounded-xl border-2 border-black p-5">
       {guestBooks
         .filter((guestBook) => guestBook.receivedUserId === userId)
         .map((filteredGuestBook) => (
           <GuestBook key={filteredGuestBook.id} {...filteredGuestBook} />
         ))}
+      <PostGuestBookForm userId={userId as string} />
     </div>
   );
 }

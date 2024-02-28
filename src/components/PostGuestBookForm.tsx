@@ -32,13 +32,18 @@ export default function PostGuestBookForm({ userId }: { userId: string }) {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="flex flex-col gap-5">
       <textarea
+        className="rounded-xl border-2 bg-gray-100 p-5"
         placeholder="따뜻한 응원 한 마디 해주세요"
         value={guestBook}
         onChange={onChange}
       />
-      <input type="submit" value="방명록 등록" />
+      <input
+        type="submit"
+        value="방명록 등록"
+        className="cursor-pointer rounded-xl border-2 bg-gray-200 p-1 text-gray-600"
+      />
     </form>
   );
 }

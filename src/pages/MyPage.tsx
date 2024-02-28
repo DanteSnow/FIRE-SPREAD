@@ -11,16 +11,19 @@ export default function MyPage() {
         <article>프로필</article>
       </section>
 
-      <section className="flex items-center justify-center gap-12">
-        <article>
-          <TodayTodoList />
-        </article>
-        <article>
-          <PostTodoForm />
-        </article>
-        <article>
-          <CompletedTodoList />
-        </article>
+      <section className="flex flex-col items-center justify-center gap-12">
+        <h1 className="mb-5 text-center text-3xl font-bold">오늘의 할일은?</h1>
+        <div className="flex flex-row items-center gap-12">
+          <article>
+            <TodayTodoList />
+          </article>
+          <article>
+            <PostTodoForm />
+          </article>
+          <article>
+            <CompletedTodoList />
+          </article>
+        </div>
       </section>
 
       <section>
@@ -30,7 +33,7 @@ export default function MyPage() {
         </div>
       </section>
 
-      <section className="mx-auto flex w-1/2 flex-col">
+      <section className="mx-auto mb-20 flex w-1/2 flex-col">
         <h1 className="mb-5 text-center text-3xl font-bold">방명록</h1>
         <GuestBookList />
       </section>
