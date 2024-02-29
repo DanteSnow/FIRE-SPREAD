@@ -30,7 +30,7 @@ export default function SignInPage() {
     try {
       setIsLoading(true);
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/");
+      navigate("/homepage");
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);

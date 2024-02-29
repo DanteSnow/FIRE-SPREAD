@@ -1,0 +1,89 @@
+@property --rotate {
+  syntax: "<angle>";
+  initial-value: 132deg;
+  inherits: false;
+}
+
+.card {
+  background: black;
+  position: relative;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  background: linear-gradient(
+    var(--rotate),
+    #ffd700,
+    #ff8c00,
+    #ff4500,
+    #ff8c00,
+    #ffd700
+  );
+}
+
+.card:hover:after {
+  left: 0;
+  width: 100%;
+}
+
+.card:active {
+  top: 2px;
+}
+
+.card::before {
+  content: "";
+  width: 104%;
+  height: 109%;
+  background-image: linear-gradient(
+    var(--rotate),
+    #ffd700,
+    #ff8c00,
+    #ff4500,
+    #ff8c00,
+    #ffd700
+  );
+  position: absolute;
+  z-index: -1;
+  border-radius: 0.75rem;
+  animation: spin 2.5s linear infinite;
+}
+
+.card::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  transform: scale(1.2);
+  filter: blur(15px);
+  background-image: linear-gradient(
+    var(--rotate),
+    #ffd700,
+    #ff8c00,
+    #ff4500,
+    #ff8c00,
+    #ffd700
+  );
+  opacity: 1;
+  transition: opacity 0.5s;
+  animation: spin 2.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    --rotate: 0deg;
+  }
+  100% {
+    --rotate: 360deg;
+  }
+}

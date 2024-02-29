@@ -38,7 +38,7 @@ export default function SignUpPage() {
         password,
       );
       await updateProfile(credentials.user, { displayName: name });
-      navigate("/");
+      navigate("/homepage");
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);

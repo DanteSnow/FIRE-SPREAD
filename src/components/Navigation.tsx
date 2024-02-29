@@ -22,7 +22,7 @@ export default function Navigation() {
   return (
     <>
       <nav className="mb-10 flex justify-center gap-10 border-2 p-6">
-        <Link to="/">
+        <Link to="/homepage">
           <div>
             <span className="cursor-pointer rounded-xl bg-black p-3 text-white">
               {" "}

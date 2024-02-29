@@ -2,7 +2,13 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        main: "url('/src/images/fireSpread.png')",
+        logo: "url('/src/images/fireSpreadLogo.png')",
+      },
+    },
   },
+
   plugins: [],
 };
