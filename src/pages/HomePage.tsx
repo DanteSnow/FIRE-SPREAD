@@ -3,7 +3,7 @@ import HomeTodayTodoList from "../components/HomeTodayTodoList";
 
 export default function HomePage() {
   return (
-    <section className="flex flex-col gap-12">
+    <section className="flex h-screen w-screen flex-col gap-12 bg-black text-white">
       <article>
         <h1 className="mb-3 flex justify-center text-xl font-bold">
           여기에 로고랑 간단한 설명
