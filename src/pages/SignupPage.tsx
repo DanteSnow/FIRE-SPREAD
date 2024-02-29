@@ -49,56 +49,54 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className=" absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center gap-2   ">
-      <div className="flex flex-col items-center justify-center">
-        <Link to="/">
-          <h1>🔥FIRE SPREAD🔥</h1>
-        </Link>
-        <span>당신의 열정을 퍼뜨려보세요</span>
-      </div>
-      <div>
-        <form onSubmit={onSubmit} className="flex flex-col gap-2">
-          <input
-            className="rounded-xl border-2 bg-gray-100 p-3"
-            onChange={onChange}
-            name="name"
-            placeholder="name"
-            type="text"
-            required
-            value={name}
-          />
-          <input
-            className="rounded-xl border-2 bg-gray-100 p-3"
-            onChange={onChange}
-            name="email"
-            placeholder="email"
-            type="email"
-            required
-            value={email}
-          />
-          <input
-            className="rounded-xl border-2 bg-gray-100 p-3"
-            onChange={onChange}
-            name="password"
-            placeholder="password"
-            type="password"
-            required
-            value={password}
-          />
-          <input
-            type="submit"
-            className="cursor-pointer rounded-xl border-2 bg-gray-200 px-3 text-gray-600"
-            value={isLoading ? "로딩중.." : "회원가입"}
-          />
-        </form>
-        <div className="flex flex-col items-center p-2">
+    <div className="absolute h-full w-full bg-black">
+      <div className="absolute left-1/2 top-1/2 m-auto w-80 -translate-x-1/2 -translate-y-1/2 transform items-center text-white">
+        <div className="flex flex-col items-center justify-center">
+          <Link to="/">
+            <div className="bg-logo h-64 w-64 bg-cover" />
+          </Link>
+          <h1 className="pt-3 text-3xl text-white">SignUp</h1>
+        </div>
+        <div className="mb-3 flex flex-col items-center p-2">
           <span>
-            이미 계정이 있으신가요?
+            Do you have an account?
             <Link to="/login">
-              <span className="font-bold"> 로그인</span>
+              <span className="font-bold hover:text-orange-500"> LogIn</span>
             </Link>
           </span>
           <span>{error !== "" ? <span>{error}</span> : null}</span>
+        </div>
+        <div>
+          <form onSubmit={onSubmit} className="flex flex-col gap-2">
+            <input
+              className="focus:border-teal rounded-xl border-2 bg-black p-3 hover:border-orange-400 focus:border-orange-500 focus:outline-none focus:ring-0"
+              onChange={onChange}
+              name="name"
+              placeholder="name"
+              type="text"
+              required
+              value={name}
+            />
+            <input
+              className="focus:border-teal rounded-xl border-2 bg-black p-3 hover:border-orange-400 focus:border-orange-500 focus:outline-none focus:ring-0"
+              onChange={onChange}
+              name="email"
+              placeholder="email"
+              type="email"
+              required
+              value={email}
+            />
+            <input
+              className="focus:border-teal rounded-xl border-2 bg-black p-3 hover:border-orange-400 focus:border-orange-500 focus:outline-none focus:ring-0"
+              onChange={onChange}
+              name="password"
+              placeholder="password"
+              type="password"
+              required
+              value={password}
+            />
+            <button className="card mt-2 w-24 rounded-xl p-2">Submit</button>
+          </form>
         </div>
       </div>
     </div>
