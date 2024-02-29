@@ -49,7 +49,7 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center gap-2   ">
+    <div className=" absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center gap-2   ">
       <div className="flex flex-col items-center justify-center">
         <Link to="/">
           <h1>🔥FIRE SPREAD🔥</h1>
@@ -94,7 +94,7 @@ export default function SignUpPage() {
         <div className="flex flex-col items-center p-2">
           <span>
             이미 계정이 있으신가요?
-            <Link to="/signin">
+            <Link to="/login">
               <span className="font-bold"> 로그인</span>
             </Link>
           </span>

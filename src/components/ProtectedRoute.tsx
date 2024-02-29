@@ -25,7 +25,7 @@ export default function ProtectedRoute({
   }, []);
 
   if (!isLogin && !isLoading) {
-    return <Navigate to="/signin" />;
+    return <Navigate to="/login" />;
   }
 
   return children;

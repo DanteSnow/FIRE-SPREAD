@@ -17,7 +17,7 @@ export default function MainPage() {
             to stimulate and motivate each other
           </span>
           <div className="mt-8 flex items-center gap-8">
-            <Link to="/signin">
+            <Link to="/login">
               <button className="card w-24 rounded-xl p-2">LogIn</button>
             </Link>
             <Link to="/signup">
