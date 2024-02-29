@@ -8,7 +8,7 @@ export default function ConfirmAuthRoute({
 }) {
   const user = auth.currentUser;
   if (user) {
-    return <Navigate to="/" />;
+    return <Navigate to="/homepage" />;
   }
   return children;
 }

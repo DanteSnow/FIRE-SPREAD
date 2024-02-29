@@ -4,6 +4,11 @@ import HomeTodayTodoList from "../components/HomeTodayTodoList";
 export default function HomePage() {
   return (
     <section className="flex flex-col gap-12">
+      <article>
+        <h1 className="mb-3 flex justify-center text-xl font-bold">
+          여기에 로고랑 간단한 설명
+        </h1>
+      </article>
       <article className="mx-auto w-1/2">
         <h1 className="mb-3 flex justify-center text-xl font-bold">
           모두의 투두리스트 현황

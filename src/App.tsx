@@ -7,13 +7,22 @@ import UserPage from "./pages/UserPage";
 import Navigation from "./components/Navigation";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ConfirmAuthRoute from "./components/ConfirmAuthRoute";
+import MainPage from "./pages/MainPage";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<MainPage />} />
         <Route element={<Navigation />}>
-          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/homepage"
+            element={
+              <ProtectedRoute>
+                <HomePage />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/mypage"
             element={
