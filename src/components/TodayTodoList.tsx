@@ -49,7 +49,7 @@ export default function TodayTodoList() {
   }, []);
 
   return (
-    <div>
+    <div className="h-52">
       {todos.map((todo) => (
         <TodayTodo key={todo.id} {...todo} />
       ))}

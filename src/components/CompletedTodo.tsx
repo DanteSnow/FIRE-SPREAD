@@ -27,9 +27,9 @@ export default function CompletedTodo({
 
   if (complete) {
     return (
-      <div className="flex flex-row-reverse items-center gap-2">
+      <div className="flex items-center gap-2">
         {user?.uid === userId ? (
-          <button onClick={onCompleteCancel}>x</button>
+          <button onClick={onCompleteCancel}>ㅇ</button>
         ) : null}{" "}
         <span className="text-lg font-bold">{todo}</span>
         <span className="text-xs">{completedAt}</span>

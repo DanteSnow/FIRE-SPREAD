@@ -8,31 +8,34 @@ export default function MyPage() {
     <section>
       <article className="mx-auto w-full">
         <header>
-          <h1 className="ml-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
+          <h1 className="m-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
             TODO
           </h1>
         </header>
-        <div className="flex gap-6 overflow-x-auto p-10">
+        <div className="flex overflow-x-auto pl-10">
           <TodayTodoList />
         </div>
 
-        <div className="flex gap-6 overflow-x-auto p-10">
+        <h1 className="m-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
+          COMPLETED
+        </h1>
+        <div className="flex overflow-x-auto pl-10">
           <CompletedTodoList />
         </div>
       </article>
       <article className="mx-auto w-full">
-        <h1 className="ml-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
-          COMPLETED
+        <h1 className="m-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
+          DAY BY DAY
         </h1>
-        <div className="mb-10 flex gap-6 overflow-x-auto p-10">
+        <div className="flex gap-6 overflow-x-auto pl-10">
           <CompletedTodoListSection />
         </div>
       </article>
       <article className="mx-auto w-full">
-        <h1 className="ml-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
+        <h1 className="m-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
           GuestBook
         </h1>
-        <div className="mb-10 flex gap-6 overflow-x-auto p-10">
+        <div className="m-9">
           <GuestBookList />
         </div>
       </article>

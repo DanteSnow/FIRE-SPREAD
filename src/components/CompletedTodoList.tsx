@@ -49,7 +49,7 @@ export default function CompletedTodoList() {
   }, []);
 
   return (
-    <div>
+    <div className="h-52">
       {todos.map((todo) => (
         <CompletedTodo key={todo.id} {...todo} />
       ))}

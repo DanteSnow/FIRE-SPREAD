@@ -3,10 +3,13 @@ import { IGuestBook } from "./GuestBookList";
 export default function GuestBook({ guestBook, username }: IGuestBook) {
   return (
     <>
-      <span className="mt-5 pb-2 pl-5 text-lg font-bold">{username}</span>
-      <span className="mb-5 h-40 rounded-xl border-2 border-black p-5">
-        {guestBook}
-      </span>
+      <div className="mb-3">
+        <span>이미지</span>
+        <span className="mt-5 pb-2 pl-5 text-lg font-bold">{username}</span>
+      </div>
+      <div className="mb-3 h-64 rounded-xl border-2 border-white p-10 ">
+        <span>{guestBook}</span>
+      </div>
     </>
   );
 }
