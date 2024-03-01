@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Navigation from "../components/Navigation";
-import UserProfile from "../components/UserProfile";
+import MyProfile from "../components/MyProfile";
 import PageHeader from "../components/PageHeader";
 import SignOut from "../components/SignOut";
 
@@ -10,7 +10,7 @@ export default function MainLayout(): JSX.Element {
       <div className="flex h-screen w-screen items-center justify-center bg-gray-400">
         <div className="flex h-3/4 w-3/4 rounded-3xl bg-black text-white">
           <div className="flex flex-1 flex-col items-center rounded-l-3xl bg-gray-700 p-4">
-            <UserProfile />
+            <MyProfile />
             <Navigation />
             <div className="flex flex-1 flex-col">
               <div className="mt-auto">
