@@ -1,46 +1,41 @@
 import CompletedTodoList from "../components/CompletedTodoList";
 import CompletedTodoListSection from "../components/CompletedTodoListSection";
 import GuestBookList from "../components/GuestBookList";
-import PostTodoForm from "../components/PostTodoForm";
 import TodayTodoList from "../components/TodayTodoList";
 
 export default function MyPage() {
   return (
-    <div className="mt-32 flex flex-col gap-32">
-      <section className="mx-auto flex flex-col">
-        <article className="flex flex-col items-center">
-          <div>사진</div>
-          <span>이름</span>
-          <p>상태메시지</p>
-        </article>
-      </section>
-
-      <section className="flex flex-col items-center justify-center gap-12">
-        <h1 className="mb-5 text-center text-3xl font-bold">오늘의 할일은?</h1>
-        <div className="flex flex-row items-center gap-12">
-          <article>
-            <TodayTodoList />
-          </article>
-          <article>
-            <PostTodoForm />
-          </article>
-          <article>
-            <CompletedTodoList />
-          </article>
+    <section>
+      <article className="mx-auto w-full">
+        <header>
+          <h1 className="ml-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
+            TODO
+          </h1>
+        </header>
+        <div className="flex gap-6 overflow-x-auto p-10">
+          <TodayTodoList />
         </div>
-      </section>
 
-      <section>
-        <h1 className="mb-5 text-center text-3xl font-bold">완료한 일정들</h1>
-        <div className="mx-auto flex w-1/2 justify-center gap-10 rounded-xl border-2 border-black p-5">
+        <div className="flex gap-6 overflow-x-auto p-10">
+          <CompletedTodoList />
+        </div>
+      </article>
+      <article className="mx-auto w-full">
+        <h1 className="ml-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
+          COMPLETED
+        </h1>
+        <div className="mb-10 flex gap-6 overflow-x-auto p-10">
           <CompletedTodoListSection />
         </div>
-      </section>
-
-      <section className="mx-auto mb-20 flex w-1/2 flex-col">
-        <h1 className="mb-5 text-center text-3xl font-bold">방명록</h1>
-        <GuestBookList />
-      </section>
-    </div>
+      </article>
+      <article className="mx-auto w-full">
+        <h1 className="ml-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
+          GuestBook
+        </h1>
+        <div className="mb-10 flex gap-6 overflow-x-auto p-10">
+          <GuestBookList />
+        </div>
+      </article>
+    </section>
   );
 }

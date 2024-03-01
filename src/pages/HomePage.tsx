@@ -3,10 +3,10 @@ import HomeTodayTodoList from "../components/HomeTodayTodoList";
 
 export default function HomePage() {
   return (
-    <>
+    <section>
       <article className="mx-auto w-full">
         <header>
-          <h1 className="ml-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
+          <h1 className="ml-9 mt-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
             TODO
           </h1>
         </header>
@@ -22,6 +22,6 @@ export default function HomePage() {
           <HomeCompletedTodoListSection />
         </div>
       </article>
-    </>
+    </section>
   );
 }
