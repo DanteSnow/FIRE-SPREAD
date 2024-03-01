@@ -71,10 +71,16 @@ export default function HomeCompletedTodoList() {
     <>
       {Object.entries(groupedTodos).map(([name, todosForName]) => (
         <Link to={`/userpage/${todosForName[0].userId}`} key={name}>
-          <div key={name} className="flex flex-col border-2 p-2">
-            <h3 className="mb-2 font-bold">{name}</h3>
+          <div className="text-center">이미지</div>
+          <h3 className="mb-2 text-center font-bold">{name}</h3>
+          <div
+            key={name}
+            className="flex h-64 w-52 flex-col overflow-x-auto rounded-xl border-2 p-6"
+          >
             {todosForName.map((todo) => (
-              <div key={todo.id}>{todo.todo}</div>
+              <div className="mb-2 flex text-nowrap" key={todo.id}>
+                {todo.todo}
+              </div>
             ))}
           </div>
         </Link>
