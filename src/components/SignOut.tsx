@@ -12,7 +12,7 @@ export default function SignOut() {
   };
   return (
     <span
-      className="cursor-pointer rounded-xl bg-black p-3 text-white"
+      className="inline-block w-40 cursor-pointer rounded-xl bg-black p-3 text-white"
       onClick={onSignOut}
     >
       로그아웃
