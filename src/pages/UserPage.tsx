@@ -5,12 +5,15 @@ import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { ITodo } from "../components/HomeCompletedTodoListSection";
 import UserTodayTodo from "../components/UserTodayTodo";
 import UserGuestBookList from "../components/UserGuestBookList";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { userNameState } from "../atoms/userState";
 
 export default function UserPage() {
   const { userId } = useParams();
   const navigate = useNavigate();
   const [todos, setTodos] = useState<ITodo[]>([]);
-  const [userName, setUserName] = useState("");
+  const setUserName = useSetRecoilState(userNameState);
+  const userName = useRecoilValue(userNameState);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -37,15 +40,17 @@ export default function UserPage() {
           id: doc.id,
         };
       });
+      if (fetchedTodos.length > 0) {
+        setUserName(fetchedTodos[0]?.username);
+      }
       setTodos(fetchedTodos);
-      setUserName(fetchedTodos[0]?.username);
     });
 
     return () => {
       unsubscribe && unsubscribe();
       unsubscribeFirestore && unsubscribeFirestore();
     };
-  }, [navigate, userId]);
+  }, [setUserName, userId, navigate]);
 
   const groupedTodos = todos.reduce(
     (acc: Record<string, ITodo[]>, todo) => {

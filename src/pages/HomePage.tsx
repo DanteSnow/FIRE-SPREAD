@@ -1,7 +1,16 @@
+import { useSetRecoilState } from "recoil";
 import HomeCompletedTodoListSection from "../components/HomeCompletedTodoListSection";
 import HomeTodayTodoList from "../components/HomeTodayTodoList";
+import { userNameState } from "../atoms/userState";
+import { useEffect } from "react";
 
 export default function HomePage() {
+  const setUserName = useSetRecoilState(userNameState);
+
+  useEffect(() => {
+    setUserName("Home");
+  }, [setUserName]);
+
   return (
     <section>
       <article className="mx-auto w-full">

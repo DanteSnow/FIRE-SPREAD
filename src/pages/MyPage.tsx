@@ -1,9 +1,18 @@
+import { useSetRecoilState } from "recoil";
 import CompletedTodoList from "../components/CompletedTodoList";
 import CompletedTodoListSection from "../components/CompletedTodoListSection";
 import GuestBookList from "../components/GuestBookList";
 import TodayTodoList from "../components/TodayTodoList";
+import { userNameState } from "../atoms/userState";
+import { useEffect } from "react";
 
 export default function MyPage() {
+  const setUserName = useSetRecoilState(userNameState);
+
+  useEffect(() => {
+    setUserName("MyPage");
+  }, [setUserName]);
+
   return (
     <section>
       <section className="mx-auto w-full">
