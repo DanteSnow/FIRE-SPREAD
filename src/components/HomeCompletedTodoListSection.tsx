@@ -75,7 +75,7 @@ export default function HomeCompletedTodoList() {
           <h3 className="mb-2 text-center font-bold">{name}</h3>
           <div
             key={name}
-            className="flex h-64 w-52 flex-col overflow-x-auto rounded-xl border-2 p-6"
+            className="flex h-64 w-52 flex-col overflow-x-auto rounded-3xl border-2 p-6"
           >
             {todosForName.map((todo) => (
               <div className="mb-2 flex text-nowrap" key={todo.id}>
