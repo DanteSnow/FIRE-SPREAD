@@ -75,7 +75,7 @@ export default function CompletedTodoListSection() {
           <h3 className="pb-2 pl-4 text-xl font-bold">{date}</h3>
           <div className="flex h-64 w-52 flex-col overflow-x-auto rounded-3xl border-2 p-6">
             {todosForDate.map((todo) => (
-              <div className="mb-2 flex text-nowrap" key={todo.id}>
+              <div key={todo.id} className="mb-2 flex text-nowrap">
                 {todo.todo}
               </div>
             ))}

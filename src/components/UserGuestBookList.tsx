@@ -49,12 +49,13 @@ export default function UserGuestBookList({ userId }: { userId: string }) {
   }, [receivedUserId]);
 
   return (
-    <div className="flex w-full flex-col rounded-xl border-2 border-black p-5">
+    <div className="flex w-full flex-col rounded-xl border-2 border-black">
       {guestBooks
         .filter((guestBook) => guestBook.receivedUserId === userId)
         .map((filteredGuestBook) => (
           <GuestBook key={filteredGuestBook.id} {...filteredGuestBook} />
         ))}
+      <h1 className="font-white text-center">여기 구분할 이미지 넣기</h1>
       <PostGuestBookForm userId={userId as string} />
     </div>
   );

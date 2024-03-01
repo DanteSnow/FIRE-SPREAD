@@ -6,39 +6,37 @@ import TodayTodoList from "../components/TodayTodoList";
 export default function MyPage() {
   return (
     <section>
-      <article className="mx-auto w-full">
-        <header>
-          <h1 className="m-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
-            TODO
-          </h1>
-        </header>
-        <div className="flex overflow-x-auto pl-10">
+      <section className="mx-auto w-full">
+        <h1 className="m-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
+          TODO
+        </h1>
+        <article className="flex overflow-x-auto pl-10">
           <TodayTodoList />
-        </div>
+        </article>
 
         <h1 className="m-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
           COMPLETED
         </h1>
-        <div className="flex overflow-x-auto pl-10">
+        <article className="flex overflow-x-auto pl-10">
           <CompletedTodoList />
-        </div>
-      </article>
-      <article className="mx-auto w-full">
+        </article>
+      </section>
+      <section className="mx-auto w-full">
         <h1 className="m-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
           DAY BY DAY
         </h1>
-        <div className="flex gap-6 overflow-x-auto pl-10">
+        <article className="flex gap-6 overflow-x-auto px-10">
           <CompletedTodoListSection />
-        </div>
-      </article>
-      <article className="mx-auto w-full">
+        </article>
+      </section>
+      <section className="mx-auto w-full">
         <h1 className="m-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
           GuestBook
         </h1>
-        <div className="m-9">
+        <article className="m-9">
           <GuestBookList />
-        </div>
-      </article>
+        </article>
+      </section>
     </section>
   );
 }

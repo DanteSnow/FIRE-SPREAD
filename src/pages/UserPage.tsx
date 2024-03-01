@@ -61,50 +61,46 @@ export default function UserPage() {
   );
 
   return (
-    <div className="mt-32 flex flex-col gap-32">
-      <section className="mx-auto flex flex-col">
-        <article className="flex flex-col items-center">
-          <div>사진</div>
-          <span>{userName}</span>
-          <p>상태메시지</p>
-        </article>
-      </section>
-
-      <section>
-        <h1 className="mb-5 text-center text-3xl font-bold">
-          {userName}님의 오늘 할일
+    <section>
+      <section className="mx-auto w-full">
+        <h1 className="m-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
+          {userName} TODO
         </h1>
-        <div className="mx-auto flex w-1/2 items-center justify-center rounded-xl border-2 border-black p-5">
-          <article>
+        <article className="flex overflow-x-auto pl-10">
+          <div className="h-52">
             {todos.map((todo) => (
               <UserTodayTodo key={todo.id} {...todo} />
             ))}
-          </article>
-        </div>
+          </div>
+        </article>
       </section>
-
-      <section className="flex flex-col justify-center">
-        <h1 className="mb-5 text-center text-3xl font-bold">
-          {userName}님의 오늘 완료한 일정들
+      <section className="mx-auto w-full">
+        <h1 className="m-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
+          {userName} COMPLETED
         </h1>
-        <article className="mx-auto flex w-1/2 justify-center gap-10 rounded-xl border-2 border-black p-10">
+        <article className="flex gap-6 overflow-x-auto px-10">
           {Object.entries(groupedTodos).map(([date, todosForDate]) => (
-            <div className="flex flex-col">
-              <h3 className="pb-2 pl-2 text-xl font-bold">{date}</h3>
-              <div className="flex flex-col rounded-xl border-2 border-black p-5">
+            <div key={date}>
+              <h3 className="pb-2 pl-4 text-xl font-bold">{date}</h3>
+              <div className="flex h-64 w-52 flex-col overflow-x-auto rounded-3xl border-2 p-6">
                 {todosForDate.map((todo) => (
-                  <span key={todo.id}>{todo.todo}</span>
+                  <div key={todo.id} className="mb-2 flex text-nowrap">
+                    {todo.todo}
+                  </div>
                 ))}
               </div>
             </div>
           ))}
         </article>
       </section>
-
-      <section className="mx-auto mb-20 flex w-1/2 flex-col">
-        <h1 className="mb-5 text-center text-3xl font-bold">방명록</h1>
-        <UserGuestBookList userId={userId as string} />
+      <section className="mx-auto w-full">
+        <h1 className="m-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
+          GUESTBOOK
+        </h1>
+        <article className="m-9">
+          <UserGuestBookList userId={userId as string} />
+        </article>
       </section>
-    </div>
+    </section>
   );
 }
