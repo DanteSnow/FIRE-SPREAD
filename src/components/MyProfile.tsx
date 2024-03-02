@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { auth, storage } from "../firebase";
+import { auth, db, storage } from "../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
 import defaultIcon from "../images/user.svg";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function MyProfile() {
   const [myName, setMyName] = useState("");
@@ -33,6 +34,10 @@ export default function MyProfile() {
     const profileUrl = await getDownloadURL(result.ref);
     setMyImage(profileUrl);
     await updateProfile(user, { photoURL: profileUrl });
+
+    const userProfileRef = doc(db, "userProfiles", user.uid);
+    await setDoc(userProfileRef, { photoURL: profileUrl }, { merge: true });
+    window.location.reload();
   };
 
   return (

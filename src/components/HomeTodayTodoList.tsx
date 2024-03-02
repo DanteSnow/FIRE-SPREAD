@@ -1,5 +1,6 @@
 import {
   collection,
+  getDocs,
   onSnapshot,
   orderBy,
   query,
@@ -9,6 +10,7 @@ import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { Unsubscribe } from "firebase/auth";
 import { Link } from "react-router-dom";
+import defaultIcon from "../images/user.svg";
 
 export interface ITodo {
   id: string;
@@ -20,8 +22,13 @@ export interface ITodo {
   completedAt: string;
 }
 
+export interface UserProfile {
+  [key: string]: string;
+}
+
 export default function HomeTodayTodoList() {
   const [todos, setTodos] = useState<ITodo[]>([]);
+  const [userProfiles, setUserProfiles] = useState<UserProfile>({});
 
   useEffect(() => {
     let unsubscribe: Unsubscribe | null = null;
@@ -54,6 +61,18 @@ export default function HomeTodayTodoList() {
     };
   }, []);
 
+  useEffect(() => {
+    const fetchUserProfiles = async () => {
+      const querySnapshot = await getDocs(collection(db, "userProfiles"));
+      const profiles: UserProfile = {};
+      querySnapshot.forEach((doc) => {
+        profiles[doc.id] = doc.data().photoURL;
+      });
+      setUserProfiles(profiles);
+    };
+    fetchUserProfiles();
+  }, []);
+
   const groupedTodos = todos.reduce(
     (acc: Record<string, ITodo[]>, todo) => {
       if (todo.username) {
@@ -71,8 +90,14 @@ export default function HomeTodayTodoList() {
     <>
       {Object.entries(groupedTodos).map(([name, todosForName]) => (
         <Link to={`/userpage/${todosForName[0].userId}`} key={name}>
-          <div className="text-center">이미지</div>
-          <h3 className="mb-2 text-center font-bold">{name}</h3>
+          <div className="flex flex-col items-center gap-2">
+            <img
+              className="h-11 w-11 cursor-pointer overflow-hidden rounded-full"
+              src={userProfiles[todosForName[0].userId] || defaultIcon}
+              alt={name}
+            />
+            <h3 className="mb-2 text-center font-bold">{name}</h3>
+          </div>
           <div className="flex h-64 w-52 flex-col overflow-x-auto rounded-3xl border-2 p-6">
             {todosForName.map((todo) => (
               <div className="mb-2 flex text-nowrap" key={todo.id}>
