@@ -72,7 +72,7 @@ export default function UserPage() {
           {userName} TODO
         </h1>
         <article className="flex overflow-x-auto pl-10">
-          <div className="h-52">
+          <div className="flex h-52 w-full flex-col gap-2">
             {todos.map((todo) => (
               <UserTodayTodo key={todo.id} {...todo} />
             ))}

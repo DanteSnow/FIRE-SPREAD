@@ -19,14 +19,14 @@ export default function MyPage() {
         <h1 className="m-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
           TODO
         </h1>
-        <article className="flex overflow-x-auto pl-10">
+        <article className="flex overflow-x-auto py-2 pl-10">
           <TodayTodoList />
         </article>
 
         <h1 className="m-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
           COMPLETED
         </h1>
-        <article className="flex overflow-x-auto pl-10">
+        <article className="flex overflow-x-auto py-2 pl-10">
           <CompletedTodoList />
         </article>
       </section>

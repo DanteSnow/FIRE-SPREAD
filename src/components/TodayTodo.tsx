@@ -30,11 +30,13 @@ export default function TodayTodo({
 
   if (!complete) {
     return (
-      <div className="flex items-center gap-2">
-        {user?.uid === userId ? (
-          <button onClick={onCompleted}>ㅇ</button>
-        ) : null}
-        <span className="text-lg font-bold">{todo}</span>
+      <div className="flex items-end gap-2">
+        <div
+          onClick={onCompleted}
+          className="flex w-1/2 cursor-pointer gap-2 rounded-2xl border-2 px-7 py-2 transition-transform duration-300 hover:-translate-x-1 hover:-translate-y-1"
+        >
+          <span className="text-lg font-bold">{todo}</span>
+        </div>
         <span className="text-xs">{createdAt}</span>
       </div>
     );
