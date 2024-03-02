@@ -3,29 +3,13 @@ import HomeCompletedTodoListSection from "../components/HomeCompletedTodoListSec
 import HomeTodayTodoList from "../components/HomeTodayTodoList";
 import { userNameState } from "../atoms/userState";
 import { useEffect } from "react";
-import { myNameState } from "../atoms/myNameState";
-import { auth } from "../firebase";
 
 export default function HomePage() {
   const setUserName = useSetRecoilState(userNameState);
-  const setMyName = useSetRecoilState(myNameState);
 
   useEffect(() => {
     setUserName("Home");
   }, [setUserName]);
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        setMyName(user.displayName || "");
-      } else {
-        setMyName("");
-      }
-    });
-    return () => {
-      unsubscribe && unsubscribe();
-    };
-  }, [setMyName]);
 
   return (
     <section>
