@@ -92,11 +92,11 @@ export default function HomeTodayTodoList() {
         <Link to={`/userpage/${todosForName[0].userId}`} key={name}>
           <div className="flex flex-col items-center gap-2">
             <img
-              className="h-11 w-11 cursor-pointer overflow-hidden rounded-full"
+              className="h-9 w-9 cursor-pointer overflow-hidden rounded-full"
               src={userProfiles[todosForName[0].userId] || defaultIcon}
               alt={name}
             />
-            <h3 className="mb-2 text-center font-bold">{name}</h3>
+            <h3 className="mb-3 text-center text-sm">{name}</h3>
           </div>
           <div className="flex h-64 w-52 flex-col overflow-x-auto rounded-3xl border-2 p-6">
             {todosForName.map((todo) => (
