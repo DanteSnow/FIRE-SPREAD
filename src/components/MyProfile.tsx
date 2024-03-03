@@ -41,10 +41,10 @@ export default function MyProfile() {
   };
 
   return (
-    <div className="flex-2 mt-28 flex flex-col items-center gap-3">
+    <div className="flex-2 mt-28 flex items-center gap-3">
       <label
         htmlFor="myImage"
-        className="h-16 w-16 cursor-pointer overflow-hidden rounded-full"
+        className="h-12 w-12 cursor-pointer overflow-hidden rounded-full"
       >
         {myImage ? (
           <img alt="User Profile" src={myImage} />
