@@ -2,7 +2,6 @@ import { Outlet } from "react-router-dom";
 import Navigation from "../components/Navigation";
 import MyProfile from "../components/MyProfile";
 import PageHeader from "../components/PageHeader";
-import SignOut from "../components/SignOut";
 import PostTodoForm from "../components/PostTodoForm";
 import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -28,9 +27,9 @@ export default function MainLayout(): JSX.Element {
     <>
       <div className="flex h-screen w-screen items-center justify-center bg-gray-400">
         <div className="flex h-3/4 w-3/4 rounded-3xl text-white">
-          <div className="flex flex-1 flex-col rounded-l-3xl bg-gray-700 p-4">
+          <div className="flex flex-1 flex-col justify-between rounded-l-3xl bg-gray-700 p-10">
             <MyProfile />
-            <section>
+            <section className="flex justify-center">
               {currentUser && <TodoCounts userId={currentUser.uid} />}
             </section>
             <section>
@@ -40,9 +39,6 @@ export default function MainLayout(): JSX.Element {
               <AllTodos />
             </section>
             <Navigation />
-            <div>
-              <SignOut />
-            </div>
           </div>
           <div className="flex w-3/4 flex-col text-white">
             <PageHeader />

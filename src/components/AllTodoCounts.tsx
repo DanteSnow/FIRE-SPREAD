@@ -71,26 +71,33 @@ export default function AllTodos() {
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col gap-3 border-2 p-3">
       {userTodoCounts.map((userCount) => (
-        <div key={userCount.username} className="flex items-center">
-          <div className="flex items-center">
-            <img
-              className="h-9 w-9 rounded-full"
-              src={userCount.photoURL || defaultIcon}
-              alt={userCount.username}
-            />
-            <div>
+        <div
+          key={userCount.username}
+          className="flex items-center justify-between"
+        >
+          <img
+            className="h-9 w-9 rounded-full"
+            src={userCount.photoURL || defaultIcon}
+            alt={userCount.username}
+          />
+          <div>
+            <div className="flex items-center gap-2">
+              <div className="h-3 w-3 rounded-full border-none bg-green-400" />
               <p>In Progress</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="h-3 w-3 rounded-full border-none bg-orange-400" />
               <p>Completed</p>
             </div>
-            <div>
-              <p>{userCount.inProgress}</p>
-              <p>{userCount.completed}</p>
-            </div>
+          </div>
+          <div>
+            <p>{userCount.inProgress}</p>
+            <p>{userCount.completed}</p>
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 }

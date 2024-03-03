@@ -41,7 +41,7 @@ export default function MyProfile() {
   };
 
   return (
-    <div className="flex-2 flex items-center gap-3">
+    <div className="flex-2 flex items-center gap-4">
       <label
         htmlFor="myImage"
         className="h-12 w-12 cursor-pointer overflow-hidden rounded-full"
@@ -59,7 +59,7 @@ export default function MyProfile() {
         accept="image/*"
         className="hidden"
       />
-      <h1>{myName}</h1>
+      <h1 className="text-xl font-bold">{myName}</h1>
     </div>
   );
 }
