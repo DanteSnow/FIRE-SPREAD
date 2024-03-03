@@ -32,6 +32,7 @@ export default function MainLayout(): JSX.Element {
             <section className="flex justify-center">
               {currentUser && <TodoCounts userId={currentUser.uid} />}
             </section>
+            <div className="border-b-2 border-gray-500" />
             <section>
               <PostTodoForm />
             </section>
