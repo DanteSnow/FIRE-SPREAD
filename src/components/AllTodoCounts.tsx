@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { collection, getDocs, query } from "firebase/firestore";
+import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from "../firebase";
 import defaultIcon from "../images/user.svg";
 
@@ -25,19 +25,17 @@ export default function AllTodos() {
   const [userTodoCounts, setUserTodoCounts] = useState<UserTodoCounts[]>([]);
 
   useEffect(() => {
-    const fetchTodos = async () => {
-      try {
-        const userProfilesSnapshot = await getDocs(
-          collection(db, "userProfiles"),
-        );
-        const userProfiles: { [key: string]: UserProfile } = {};
+    const fetchTodos = () => {
+      const userProfiles: { [key: string]: UserProfile } = {};
+
+      onSnapshot(collection(db, "userProfiles"), (userProfilesSnapshot) => {
         userProfilesSnapshot.docs.forEach((doc) => {
           const data = doc.data() as Omit<UserProfile, "userId">;
           userProfiles[doc.id] = { userId: doc.id, ...data };
         });
+      });
 
-        const q = query(collection(db, "todo"));
-        const querySnapshot = await getDocs(q);
+      onSnapshot(query(collection(db, "todo")), (querySnapshot) => {
         const todosData: Todo[] = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...(doc.data() as Omit<Todo, "id">),
@@ -48,7 +46,7 @@ export default function AllTodos() {
           if (!counts[todo.userId]) {
             counts[todo.userId] = {
               ...userProfiles[todo.userId],
-              username: todo.username, // Add this line
+              username: todo.username,
               completed: 0,
               inProgress: 0,
             };
@@ -62,9 +60,7 @@ export default function AllTodos() {
         });
 
         setUserTodoCounts(Object.values(counts));
-      } catch (error) {
-        console.error("Error fetching todos: ", error);
-      }
+      });
     };
 
     fetchTodos();

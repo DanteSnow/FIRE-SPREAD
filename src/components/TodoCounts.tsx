@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 
 interface Todo {
@@ -17,21 +17,19 @@ export default function TodoCounts({ userId }: TodoCountsProps) {
   const [todos, setTodos] = useState<Todo[]>([]);
 
   useEffect(() => {
-    const fetchTodos = async () => {
-      try {
-        const q = query(collection(db, "todo"), where("userId", "==", userId));
-        const querySnapshot = await getDocs(q);
-        const todosData: Todo[] = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...(doc.data() as Omit<Todo, "id">),
-        }));
-        setTodos(todosData);
-      } catch (error) {
-        console.error("Error fetching todos: ", error);
-      }
-    };
+    const q = query(collection(db, "todo"), where("userId", "==", userId));
 
-    fetchTodos();
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const todosData: Todo[] = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...(doc.data() as Omit<Todo, "id">),
+      }));
+      setTodos(todosData);
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, [userId]);
 
   const completedTodos = todos.filter((todo) => todo.complete).length;
