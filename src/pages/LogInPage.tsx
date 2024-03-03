@@ -28,11 +28,11 @@ export default function LogInPage() {
     if (loading || email === "" || password === "") {
       return;
     }
+    setLoading(true);
     try {
-      setLoading(true);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/homepage");
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);

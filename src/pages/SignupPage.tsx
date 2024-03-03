@@ -2,10 +2,11 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function SignUpPage() {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
+  const [Loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,11 +28,11 @@ export default function SignUpPage() {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
-    if (isLoading || name === "" || email === "" || password === "") {
+    if (Loading || name === "" || email === "" || password === "") {
       return;
     }
     try {
-      setIsLoading(true);
+      setLoading(true);
       const credentials = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -39,21 +40,23 @@ export default function SignUpPage() {
       );
       await updateProfile(credentials.user, { displayName: name });
       navigate("/homepage");
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
       }
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
   return (
     <div className="absolute h-full w-full bg-black">
+      {Loading && <LoadingSpinner />}
       <div className="absolute left-1/2 top-1/2 m-auto w-80 -translate-x-1/2 -translate-y-1/2 transform items-center text-white">
         <div className="flex flex-col items-center justify-center">
           <Link to="/">
-            <div className="bg-logo h-64 w-64 bg-cover" />
+            <div className="h-64 w-64 bg-logo bg-cover" />
           </Link>
           <h1 className="pt-3 text-3xl text-white">SignUp</h1>
         </div>
