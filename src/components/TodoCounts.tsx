@@ -4,15 +4,13 @@ import { db } from "../firebase";
 
 interface Todo {
   id: string;
-  complete: boolean;
   userId: string;
-  username: string;
-  createdAt: string;
-  todo: string;
+  content: string;
+  complete: boolean;
 }
 
 interface TodoCountsProps {
-  userId?: string | null | undefined;
+  userId: string;
 }
 
 export default function TodoCounts({ userId }: TodoCountsProps) {
@@ -20,20 +18,17 @@ export default function TodoCounts({ userId }: TodoCountsProps) {
 
   useEffect(() => {
     const fetchTodos = async () => {
-      let q;
-      if (userId) {
-        q = query(collection(db, "todos"), where("userId", "==", userId));
-      } else {
-        q = query(collection(db, "todos"));
+      try {
+        const q = query(collection(db, "todo"), where("userId", "==", userId));
+        const querySnapshot = await getDocs(q);
+        const todosData: Todo[] = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...(doc.data() as Omit<Todo, "id">),
+        }));
+        setTodos(todosData);
+      } catch (error) {
+        console.error("Error fetching todos: ", error);
       }
-
-      const querySnapshot = await getDocs(q);
-      const todosData: Todo[] = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...(doc.data() as Omit<Todo, "id">),
-      }));
-
-      setTodos(todosData);
     };
 
     fetchTodos();
@@ -43,9 +38,15 @@ export default function TodoCounts({ userId }: TodoCountsProps) {
   const inProgressTodos = todos.length - completedTodos;
 
   return (
-    <div>
-      <p>Completed: {completedTodos}</p>
-      <p>In Progress: {inProgressTodos}</p>
+    <div className="flex justify-between">
+      <div>
+        <p>In Progress</p>
+        <p>Completed</p>
+      </div>
+      <div>
+        <p>{inProgressTodos}</p>
+        <p>{completedTodos}</p>
+      </div>
     </div>
   );
 }

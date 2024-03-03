@@ -4,26 +4,40 @@ import MyProfile from "../components/MyProfile";
 import PageHeader from "../components/PageHeader";
 import SignOut from "../components/SignOut";
 import PostTodoForm from "../components/PostTodoForm";
-import { auth } from "../firebase";
+import { useEffect, useState } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import TodoCounts from "../components/TodoCounts";
+import { User } from "firebase/auth";
+import AllTodos from "../components/AllTodoCounts";
 
 export default function MainLayout(): JSX.Element {
-  const currentUserId = auth.currentUser?.uid;
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  });
 
   return (
     <>
       <div className="flex h-screen w-screen items-center justify-center bg-gray-400">
-        <div className="flex h-3/4 w-3/4 rounded-3xl bg-black text-white">
+        <div className="flex h-3/4 w-3/4 rounded-3xl text-white">
           <div className="flex flex-1 flex-col rounded-l-3xl bg-gray-700 p-4">
             <MyProfile />
             <section>
-              <h1>내 진행상황은?</h1>
-              <TodoCounts userId={currentUserId} />
+              {currentUser && <TodoCounts userId={currentUser.uid} />}
             </section>
-            <PostTodoForm />
             <section>
-              <h1>다른 사람들의 진행상황은?</h1>
-              <TodoCounts />
+              <PostTodoForm />
+            </section>
+            <section>
+              <AllTodos />
             </section>
             <Navigation />
             <div>
@@ -32,7 +46,9 @@ export default function MainLayout(): JSX.Element {
           </div>
           <div className="flex w-3/4 flex-col text-white">
             <PageHeader />
-            <main className="gap-12 overflow-auto">{<Outlet />}</main>
+            <main className="gap-12 overflow-auto rounded-br-3xl bg-black">
+              {<Outlet />}
+            </main>
           </div>
         </div>
       </div>
