@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import TodoCounts from "../components/TodoCounts";
 import { User } from "firebase/auth";
-import AllTodos from "../components/AllTodoCounts";
+import AllTodoCounts from "../components/AllTodoCounts";
 
 export default function MainLayout(): JSX.Element {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -37,7 +37,7 @@ export default function MainLayout(): JSX.Element {
               <PostTodoForm />
             </section>
             <section>
-              <AllTodos />
+              <AllTodoCounts />
             </section>
             <Navigation />
           </div>

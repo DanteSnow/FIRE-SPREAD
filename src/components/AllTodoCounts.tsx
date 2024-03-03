@@ -21,7 +21,7 @@ interface Todo {
   complete: boolean;
 }
 
-export default function AllTodos() {
+export default function AllTodoCounts() {
   const [userTodoCounts, setUserTodoCounts] = useState<UserTodoCounts[]>([]);
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export default function AllTodos() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-3 border-2 p-3">
+    <div className="h-500 flex flex-col gap-3 overflow-auto border-2 p-3">
       {userTodoCounts.map((userCount) => (
         <div
           key={userCount.username}
