@@ -4,7 +4,7 @@ import { auth, db } from "../firebase";
 
 export default function PostTodoForm() {
   const [todo, setTodo] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTodo(e.target.value);
@@ -16,9 +16,9 @@ export default function PostTodoForm() {
     const nowDate = Date.now();
     const now = new Date(nowDate);
     const date = now.toLocaleDateString("ko-KR");
-    if (!user || isLoading || todo === "") return;
+    if (!user || loading || todo === "") return;
+    setLoading(true);
     try {
-      setIsLoading(true);
       await addDoc(collection(db, "todo"), {
         todo,
         complete: false,
@@ -26,16 +26,19 @@ export default function PostTodoForm() {
         username: user.displayName,
         userId: user.uid,
       });
+      setTodo("");
     } catch (error) {
       console.error(error);
     } finally {
-      setTodo("");
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
   return (
-    <form className="relative mt-5 flex w-full flex-col gap-3">
+    <form
+      onSubmit={onSubmit}
+      className="relative mt-5 flex w-full flex-col gap-3"
+    >
       <textarea
         className="relative rounded-lg border-2 border-none bg-black p-3"
         placeholder="오늘의 할일은?"

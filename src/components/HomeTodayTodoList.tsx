@@ -98,7 +98,7 @@ export default function HomeTodayTodoList() {
             />
             <h3 className="mb-3 text-center text-sm">{name}</h3>
           </div>
-          <div className="flex h-64 w-52 flex-col overflow-x-auto whitespace-pre-wrap rounded-3xl border-2 p-6">
+          <div className="flex h-64 w-52 flex-col overflow-x-auto rounded-3xl border-2 p-6">
             {todosForName.map((todo) => (
               <div className="mb-2 flex text-nowrap" key={todo.id}>
                 {todo.todo}
