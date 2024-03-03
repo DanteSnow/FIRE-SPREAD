@@ -38,7 +38,7 @@ export default function MyPage() {
           <CompletedTodoListSection />
         </article>
       </section>
-      <section className="mx-auto w-full">
+      <section>
         <h1 className="m-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
           GuestBook
         </h1>
