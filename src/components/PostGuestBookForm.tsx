@@ -10,7 +10,7 @@ export default function PostGuestBookForm({ userId }: { userId: string }) {
     setGuestBook(e.target.value);
   };
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     const user = auth.currentUser;
     if (!user || isLoading || guestBook === "") return;
@@ -32,12 +32,18 @@ export default function PostGuestBookForm({ userId }: { userId: string }) {
   };
 
   return (
-    <form onSubmit={onSubmit} className="mt-10 flex flex-col gap-5 pt-10">
+    <form className="mt-10 flex flex-col gap-5 pt-10">
       <textarea
         className="rounded-xl border-2 bg-black p-5"
         placeholder="따뜻한 응원 한 마디 해주세요"
         value={guestBook}
         onChange={onChange}
+        onKeyDown={(e: React.KeyboardEvent) => {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            onSubmit(e);
+          }
+        }}
       />
       <input
         type="submit"

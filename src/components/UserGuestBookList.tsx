@@ -49,7 +49,7 @@ export default function UserGuestBookList({ userId }: { userId: string }) {
   }, [receivedUserId]);
 
   return (
-    <div className="flex w-full flex-col rounded-xl border-2 border-black">
+    <div className="flex w-full flex-col whitespace-pre-wrap rounded-xl border-2 border-black">
       {guestBooks
         .filter((guestBook) => guestBook.receivedUserId === userId)
         .map((filteredGuestBook) => (

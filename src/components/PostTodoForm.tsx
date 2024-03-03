@@ -10,7 +10,7 @@ export default function PostTodoForm() {
     setTodo(e.target.value);
   };
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     const user = auth.currentUser;
     const nowDate = Date.now();
@@ -35,15 +35,18 @@ export default function PostTodoForm() {
   };
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="relative mt-5 flex w-full flex-col gap-3"
-    >
+    <form className="relative mt-5 flex w-full flex-col gap-3">
       <textarea
         className="relative rounded-lg border-2 border-none bg-black p-3"
         placeholder="오늘의 할일은?"
         value={todo}
         onChange={onChange}
+        onKeyDown={(e: React.KeyboardEvent) => {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            onSubmit(e);
+          }
+        }}
       />
       <input
         className="absolute right-4 top-1/2 -translate-y-1/2 transform cursor-pointer rounded-lg border-2 bg-black p-2 text-sm"

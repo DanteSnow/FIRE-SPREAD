@@ -49,7 +49,7 @@ export default function CompletedTodoList() {
   }, []);
 
   return (
-    <div className="flex h-52 w-full flex-col gap-2">
+    <div className="flex h-52 w-full flex-col gap-2 whitespace-pre-wrap">
       {todos.map((todo) => (
         <CompletedTodo key={todo.id} {...todo} />
       ))}

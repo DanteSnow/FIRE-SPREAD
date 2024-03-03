@@ -51,7 +51,7 @@ export default function GuestBookList() {
   }, [currentUserId]);
 
   return (
-    <div className="flex w-full flex-col rounded-xl border-2 border-black">
+    <div className="flex w-full flex-col whitespace-pre-wrap rounded-xl border-2 border-black">
       {guestBooks.map((guestBook) => (
         <GuestBook key={guestBook.id} {...guestBook} />
       ))}
