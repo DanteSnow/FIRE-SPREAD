@@ -41,7 +41,7 @@ export default function MyProfile() {
   };
 
   return (
-    <div className="flex-2 mt-28 flex items-center gap-3">
+    <div className="flex-2 flex items-center gap-3">
       <label
         htmlFor="myImage"
         className="h-12 w-12 cursor-pointer overflow-hidden rounded-full"
