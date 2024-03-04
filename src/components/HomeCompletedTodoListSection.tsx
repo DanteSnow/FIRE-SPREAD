@@ -12,7 +12,7 @@ import { Unsubscribe } from "firebase/auth";
 import { Link } from "react-router-dom";
 import { UserProfile } from "./HomeTodayTodoList";
 import defaultIcon from "../images/user.svg";
-
+import fireIcon from "../images/fire.svg";
 export interface ITodo {
   id: string;
   createdAt: string;
@@ -97,10 +97,11 @@ export default function HomeCompletedTodoList() {
           </div>
           <div
             key={name}
-            className="flex h-64 w-52 flex-col overflow-x-auto whitespace-pre-wrap rounded-3xl border-2 p-6"
+            className="flex h-64 w-52 flex-col overflow-x-auto whitespace-pre-wrap rounded-3xl border-none bg-gray-700 p-6"
           >
             {todosForName.map((todo) => (
-              <div className="mb-2 flex text-nowrap" key={todo.id}>
+              <div className="mb-2 flex gap-2 text-nowrap" key={todo.id}>
+                <img className="w-4" src={fireIcon} />
                 {todo.todo}
               </div>
             ))}

@@ -6,7 +6,7 @@ export default function PageHeader() {
 
   return (
     <header className="rounded-tr-3xl bg-gray-500 py-16 pl-10">
-      <h1 className="text-xl font-bold">{userName}</h1>
+      <h1 className="text-8xl font-bold text-gray-700">{userName}</h1>
     </header>
   );
 }

@@ -7,6 +7,7 @@ import UserTodayTodo from "../components/UserTodayTodo";
 import UserGuestBookList from "../components/UserGuestBookList";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { userNameState } from "../atoms/userState";
+import fireIcon from "../images/fire.svg";
 
 export default function UserPage() {
   const { userId } = useParams();
@@ -68,11 +69,12 @@ export default function UserPage() {
   return (
     <section>
       <section className="mx-auto w-full">
-        <h1 className="m-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
-          {userName} TODO
-        </h1>
+        <div className="m-9 flex w-3/4 items-center gap-2 rounded-xl border-none bg-gray-500 p-4">
+          <img className="w-8" src={fireIcon} />
+          <h1 className="text-lg font-bold"> {userName}'s TO-DO LIST</h1>
+        </div>
         <article className="flex overflow-x-auto pl-10">
-          <div className="flex h-72 w-full flex-col gap-2">
+          <div className="flex h-72 w-full flex-col gap-2 whitespace-pre-wrap">
             {todos.map((todo) => (
               <UserTodayTodo key={todo.id} {...todo} />
             ))}
@@ -80,17 +82,21 @@ export default function UserPage() {
         </article>
       </section>
       <section className="mx-auto w-full">
-        <h1 className="m-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
-          {userName} COMPLETED
-        </h1>
+        <div className="m-9 flex w-3/4 items-center gap-2 rounded-xl border-none bg-gray-500 p-4">
+          <img className="w-8" src={fireIcon} />
+          <h1 className="text-lg font-bold"> {userName}'s COMPLETED LIST</h1>
+        </div>
         <article className="flex gap-6 overflow-x-auto px-10">
           {Object.entries(groupedTodos).map(([date, todosForDate]) => (
             <div key={date}>
               <h3 className="pb-2 pl-4 text-xl font-bold">{date}</h3>
-              <div className="flex h-64 w-52 flex-col overflow-x-auto rounded-3xl border-2 p-6">
+              <div className="flex h-64 w-52 flex-col overflow-x-auto whitespace-pre-wrap rounded-2xl border-none bg-gray-700 p-6">
                 {todosForDate.map((todo) => (
-                  <div key={todo.id} className="mb-2 flex text-nowrap">
-                    {todo.todo}
+                  <div className="mb-2 flex items-center gap-3">
+                    <img className="w-4" src={fireIcon} />
+                    <div key={todo.id} className="flex text-nowrap">
+                      {todo.todo}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -99,9 +105,10 @@ export default function UserPage() {
         </article>
       </section>
       <section className="mx-auto w-full">
-        <h1 className="m-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
-          GUESTBOOK
-        </h1>
+        <div className="m-9 flex w-3/4 items-center gap-2 rounded-xl border-none bg-gray-500 p-4">
+          <img className="w-8" src={fireIcon} />
+          <h1 className="text-lg font-bold"> {userName}'s GUESTBOOK</h1>
+        </div>
         <article className="m-9">
           <UserGuestBookList userId={userId as string} />
         </article>

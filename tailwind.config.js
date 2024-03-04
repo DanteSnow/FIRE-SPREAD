@@ -7,7 +7,6 @@ export default {
         main: "url('/src/images/fireSpread.png')",
         logo: "url('/src/images/fireSpreadLogo.png')",
       },
-
       height: {
         500: "500px",
       },

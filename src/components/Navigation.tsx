@@ -3,6 +3,9 @@ import { auth } from "../firebase";
 import LoadingSpinner from "./LoadingSpinner";
 import { useRecoilState } from "recoil";
 import { pageMoveLoadingState } from "../atoms/pageMoveLoadingState";
+import homeIcon from "../images/home.svg";
+import userIcon from "../images/userCircle.svg";
+import logoutIcon from "../images/logout.svg";
 
 export default function Navigation() {
   const [loading, setLoading] = useRecoilState(pageMoveLoadingState);
@@ -27,26 +30,29 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="flex flex-col">
+    <nav className="flex flex-col justify-center gap-2">
       {loading && <LoadingSpinner />}
       <div
         onClick={() => handleClick("/homepage")}
-        className="w-40 cursor-pointer rounded-xl bg-black p-3 text-white"
+        className="h-13 flex w-full cursor-pointer items-center gap-3 rounded-2xl bg-gray-700 p-3 text-white transition-transform duration-300 hover:-translate-x-1 hover:-translate-y-1"
       >
-        홈
+        <img className="h-7" src={homeIcon} />
+        <span className="text-sm font-bold">HOME</span>
       </div>
       <div
         onClick={() => handleClick("/mypage")}
-        className="w-40 cursor-pointer rounded-xl bg-black p-3 text-white"
+        className="h-13 flex w-full cursor-pointer items-center gap-3 rounded-2xl bg-gray-700 p-3 text-white transition-transform duration-300 hover:-translate-x-1 hover:-translate-y-1"
       >
-        마이페이지
+        <img className="h-7" src={userIcon} />
+        <span className="text-sm font-bold ">MY PAGE</span>
       </div>
-      <span
-        className="inline-block w-40 cursor-pointer rounded-xl bg-black p-3 text-white"
+      <div
         onClick={onSignOut}
+        className="h-13 flex w-full cursor-pointer items-center gap-3 rounded-2xl bg-gray-700 p-3 text-white transition-transform duration-300 hover:-translate-x-1 hover:-translate-y-1"
       >
-        로그아웃
-      </span>
+        <img className="h-7" src={logoutIcon} />
+        <span className="text-sm font-bold ">LOG OUT</span>
+      </div>
     </nav>
   );
 }

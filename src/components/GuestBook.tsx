@@ -30,7 +30,7 @@ export default function GuestBook({ guestBook, username, userId }: IGuestBook) {
         />
         <span className="pb-2 pl-4 text-sm">{username}</span>
       </div>
-      <div className="mb-8 h-64 rounded-xl border-2 border-white p-10 ">
+      <div className="mb-8 h-64 rounded-3xl border-none bg-gray-700 p-10 ">
         <span>{guestBook}</span>
       </div>
     </>

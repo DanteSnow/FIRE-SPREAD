@@ -32,9 +32,9 @@ export default function PostGuestBookForm({ userId }: { userId: string }) {
   };
 
   return (
-    <form className="flex flex-col gap-5 pt-10">
+    <form className="relative flex flex-col gap-5 pt-10">
       <textarea
-        className="rounded-xl border-2 bg-black p-5"
+        className="rounded-2xl border-none bg-gray-500 p-5"
         placeholder="따뜻한 응원 한 마디 해주세요"
         value={guestBook}
         onChange={onChange}
@@ -47,8 +47,8 @@ export default function PostGuestBookForm({ userId }: { userId: string }) {
       />
       <input
         type="submit"
-        value="방명록 등록"
-        className="cursor-pointer rounded-xl border-2 bg-gray-700 p-1 text-white"
+        value="Submit"
+        className="absolute bottom-3 right-5 cursor-pointer rounded-xl bg-gray-700 p-3 text-xs text-white"
       />
     </form>
   );

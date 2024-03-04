@@ -67,7 +67,7 @@ export default function AllTodoCounts() {
   }, []);
 
   return (
-    <div className="h-500 flex flex-col gap-3 overflow-auto border-2 p-3">
+    <div className="h-500 flex flex-col gap-6 overflow-auto rounded-2xl border-none bg-gray-700 p-5">
       {userTodoCounts.map((userCount) => (
         <div
           key={userCount.username}
@@ -78,7 +78,7 @@ export default function AllTodoCounts() {
             src={userCount.photoURL || defaultIcon}
             alt={userCount.username}
           />
-          <div>
+          <div className="text-xs">
             <div className="flex items-center gap-2">
               <div className="h-3 w-3 rounded-full border-none bg-green-400" />
               <p>In Progress</p>
@@ -88,7 +88,7 @@ export default function AllTodoCounts() {
               <p>Completed</p>
             </div>
           </div>
-          <div>
+          <div className="text-xs">
             <p>{userCount.inProgress}</p>
             <p>{userCount.completed}</p>
           </div>

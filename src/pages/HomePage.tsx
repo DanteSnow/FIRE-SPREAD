@@ -3,6 +3,7 @@ import HomeCompletedTodoListSection from "../components/HomeCompletedTodoListSec
 import HomeTodayTodoList from "../components/HomeTodayTodoList";
 import { userNameState } from "../atoms/userState";
 import { useEffect } from "react";
+import fireIcon from "../images/fire.svg";
 
 export default function HomePage() {
   const setUserName = useSetRecoilState(userNameState);
@@ -14,19 +15,19 @@ export default function HomePage() {
   return (
     <section>
       <article className="mx-auto w-full">
-        <header>
-          <h1 className="ml-9 mt-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
-            TODO
-          </h1>
-        </header>
+        <div className="ml-9 mt-9 flex w-3/4 items-center gap-2 rounded-xl border-none bg-gray-500 p-4">
+          <img className="w-8" src={fireIcon} />
+          <h1 className="text-lg font-bold">EVERYONE's TO-DO LIST</h1>
+        </div>
         <div className="flex gap-6 overflow-x-auto p-10">
           <HomeTodayTodoList />
         </div>
       </article>
       <article className="mx-auto w-full">
-        <h1 className="ml-9 flex w-52 rounded-3xl border-2 p-4 text-center text-lg font-bold">
-          COMPLETED
-        </h1>
+        <div className="ml-9 mt-9 flex w-3/4 items-center gap-2 rounded-xl border-none bg-gray-500 p-4">
+          <img className="w-8" src={fireIcon} />
+          <h1 className="text-lg font-bold">EVERYONE's COMPLETED LIST</h1>
+        </div>
         <div className="mb-10 flex gap-6 overflow-x-auto p-10">
           <HomeCompletedTodoListSection />
         </div>

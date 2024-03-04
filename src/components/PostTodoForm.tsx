@@ -40,7 +40,7 @@ export default function PostTodoForm() {
       className="relative mt-5 flex w-full flex-col gap-3"
     >
       <textarea
-        className="relative rounded-lg border-2 border-none bg-black p-3"
+        className="relative rounded-2xl border-none bg-gray-700 p-3"
         placeholder="오늘의 할일은?"
         value={todo}
         onChange={onChange}
@@ -52,7 +52,7 @@ export default function PostTodoForm() {
         }}
       />
       <input
-        className="absolute right-4 top-1/2 -translate-y-1/2 transform cursor-pointer rounded-lg border-2 bg-black p-2 text-sm"
+        className="absolute bottom-2 right-4 cursor-pointer rounded-lg bg-gray-800 p-2 text-xs"
         type="submit"
         value="Submit"
       />
