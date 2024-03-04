@@ -32,7 +32,7 @@ export default function PostGuestBookForm({ userId }: { userId: string }) {
   };
 
   return (
-    <form className="relative flex flex-col gap-5 pt-10">
+    <form onSubmit={onSubmit} className="relative flex flex-col gap-5 pt-10">
       <textarea
         className="rounded-2xl border-none bg-gray-500 p-5"
         placeholder="따뜻한 응원 한 마디 해주세요"
