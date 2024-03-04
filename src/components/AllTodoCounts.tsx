@@ -67,7 +67,7 @@ export default function AllTodoCounts() {
   }, []);
 
   return (
-    <div className="h-500 flex flex-col gap-6 overflow-auto rounded-2xl border-none bg-gray-700 p-5">
+    <div className="flex w-full flex-col gap-6 overflow-auto rounded-2xl border-none bg-gray-700 p-5">
       {userTodoCounts.map((userCount) => (
         <div
           key={userCount.username}
