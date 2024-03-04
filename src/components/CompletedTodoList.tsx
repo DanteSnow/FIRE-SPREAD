@@ -29,7 +29,7 @@ export default function CompletedTodoList() {
         const todoQuery = query(
           collection(db, "todo"),
           where("userId", "==", user.uid),
-          orderBy("createdAt", "desc"),
+          orderBy("completedAt", "desc"),
         );
         return onSnapshot(todoQuery, (snapshot) => {
           const fetchedTodos = snapshot.docs.map((doc) => ({
