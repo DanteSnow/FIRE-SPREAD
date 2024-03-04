@@ -94,7 +94,7 @@ export default function UserPage() {
                 {todosForDate.map((todo) => (
                   <div key={todo.id} className="mb-2 flex items-center gap-3">
                     <img className="w-4" src={fireIcon} />
-                    <div className="flex text-nowrap">{todo.todo}</div>
+                    <div className="flex">{todo.todo}</div>
                   </div>
                 ))}
               </div>
