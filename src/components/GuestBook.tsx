@@ -22,13 +22,13 @@ export default function GuestBook({ guestBook, username, userId }: IGuestBook) {
 
   return (
     <>
-      <div className="mb-4 flex items-center">
+      <div className="mb-4 flex items-center gap-3">
         <img
           src={userProfiles[userId] ? userProfiles[userId] : defaultIcon}
           alt={userId}
           className="h-9 w-9 overflow-hidden rounded-full"
         />
-        <span className="pb-2 pl-4 text-sm">{username}</span>
+        <span className="text-sm">{username}</span>
       </div>
       <div className="mb-8 h-64 rounded-3xl border-none bg-gray-700 p-10 ">
         <span>{guestBook}</span>

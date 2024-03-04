@@ -1,24 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import LoadingSpinner from "./LoadingSpinner";
-import { useRecoilState } from "recoil";
-import { pageMoveLoadingState } from "../atoms/pageMoveLoadingState";
 import homeIcon from "../images/home.svg";
 import userIcon from "../images/userCircle.svg";
 import logoutIcon from "../images/logout.svg";
+import { useState } from "react";
 
 export default function Navigation() {
-  const [loading, setLoading] = useRecoilState(pageMoveLoadingState);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const onSignOut = async () => {
     const ok = confirm("로그아웃 하시겠습니까?");
     if (ok) {
       await auth.signOut();
-      setLoading(true);
       navigate("/");
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setLoading(false);
     }
   };
 
