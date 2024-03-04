@@ -92,11 +92,9 @@ export default function UserPage() {
               <h3 className="pb-2 pl-4 text-xl font-bold">{date}</h3>
               <div className="flex h-64 w-52 flex-col overflow-x-auto whitespace-pre-wrap rounded-2xl border-none bg-gray-700 p-6">
                 {todosForDate.map((todo) => (
-                  <div className="mb-2 flex items-center gap-3">
+                  <div key={todo.id} className="mb-2 flex items-center gap-3">
                     <img className="w-4" src={fireIcon} />
-                    <div key={todo.id} className="flex text-nowrap">
-                      {todo.todo}
-                    </div>
+                    <div className="flex text-nowrap">{todo.todo}</div>
                   </div>
                 ))}
               </div>
