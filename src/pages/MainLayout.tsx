@@ -36,14 +36,14 @@ export default function MainLayout(): JSX.Element {
             <section className="flex-grow">
               <PostTodoForm />
             </section>
-            <section className="scrollbar-hide flex flex-grow overflow-auto">
+            <section className="flex flex-grow overflow-auto">
               <AllTodoCounts />
             </section>
             <Navigation />
           </div>
           <div className="flex w-3/4 flex-col text-white">
             <PageHeader />
-            <main className="gap-12 overflow-auto rounded-br-3xl bg-gray-600">
+            <main className="gap-12 overflow-auto rounded-br-3xl bg-gray-600 scrollbar-hide">
               {<Outlet />}
             </main>
           </div>
