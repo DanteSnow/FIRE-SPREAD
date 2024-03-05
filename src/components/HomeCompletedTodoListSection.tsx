@@ -97,7 +97,7 @@ export default function HomeCompletedTodoList() {
           </div>
           <div
             key={name}
-            className="flex h-64 w-52 flex-col overflow-x-auto whitespace-pre-wrap rounded-3xl border-none bg-gray-700 p-6"
+            className="scrollbar-hide flex h-64 w-52 flex-col overflow-x-auto whitespace-pre-wrap rounded-3xl border-none bg-gray-700 p-6"
           >
             {todosForName.map((todo) => (
               <div className="mb-2 flex gap-2" key={todo.id}>

@@ -19,7 +19,7 @@ export default function HomePage() {
           <img className="w-8" src={fireIcon} />
           <h1 className="text-lg font-bold">EVERYONE's TO-DO LIST</h1>
         </div>
-        <div className="flex gap-6 overflow-x-auto p-10">
+        <div className="scrollbar-hide flex gap-6 overflow-x-auto p-10">
           <HomeTodayTodoList />
         </div>
       </article>
@@ -28,7 +28,7 @@ export default function HomePage() {
           <img className="w-8" src={fireIcon} />
           <h1 className="text-lg font-bold">EVERYONE's COMPLETED LIST</h1>
         </div>
-        <div className="mb-10 flex gap-6 overflow-x-auto p-10">
+        <div className="scrollbar-hide mb-10 flex gap-6 overflow-x-auto p-10">
           <HomeCompletedTodoListSection />
         </div>
       </article>

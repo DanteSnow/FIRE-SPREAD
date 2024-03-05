@@ -21,7 +21,7 @@ export default function MyPage() {
           <img className="w-8" src={fireIcon} />
           <h1 className="text-lg font-bold">TO-DO LIST</h1>
         </div>
-        <article className="flex overflow-x-auto py-2 pl-10">
+        <article className="scrollbar-hide flex overflow-x-auto py-2 pl-10">
           <TodayTodoList />
         </article>
 
@@ -29,7 +29,7 @@ export default function MyPage() {
           <img className="w-8" src={fireIcon} />
           <h1 className="text-lg font-bold">COMPLETED LIST</h1>
         </div>
-        <article className="flex overflow-x-auto py-2 pl-10">
+        <article className="scrollbar-hide flex overflow-x-auto py-2 pl-10">
           <CompletedTodoList />
         </article>
       </section>
@@ -39,7 +39,7 @@ export default function MyPage() {
           <h1 className="text-lg font-bold">COMPLETED LIST</h1>
           <span className="text-sm">by date</span>
         </div>
-        <article className="flex gap-6 overflow-x-auto px-10">
+        <article className="scrollbar-hide flex gap-6 overflow-x-auto px-10">
           <CompletedTodoListSection />
         </article>
       </section>

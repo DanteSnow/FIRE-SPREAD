@@ -36,7 +36,7 @@ export default function MainLayout(): JSX.Element {
             <section className="flex-grow">
               <PostTodoForm />
             </section>
-            <section className="flex flex-grow overflow-auto">
+            <section className="scrollbar-hide flex flex-grow overflow-auto">
               <AllTodoCounts />
             </section>
             <Navigation />

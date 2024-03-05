@@ -73,7 +73,7 @@ export default function UserPage() {
           <img className="w-8" src={fireIcon} />
           <h1 className="text-lg font-bold"> {userName}'s TO-DO LIST</h1>
         </div>
-        <article className="flex overflow-x-auto pl-10">
+        <article className="scrollbar-hide flex overflow-x-auto pl-10">
           <div className="flex h-72 w-full flex-col gap-2 whitespace-pre-wrap">
             {todos.map((todo) => (
               <UserTodayTodo key={todo.id} {...todo} />
@@ -86,11 +86,11 @@ export default function UserPage() {
           <img className="w-8" src={fireIcon} />
           <h1 className="text-lg font-bold"> {userName}'s COMPLETED LIST</h1>
         </div>
-        <article className="flex gap-6 overflow-x-auto px-10">
+        <article className="scrollbar-hide flex gap-6 overflow-x-auto px-10">
           {Object.entries(groupedTodos).map(([date, todosForDate]) => (
             <div key={date}>
               <h3 className="pb-2 pl-4 text-xl font-bold">{date}</h3>
-              <div className="flex h-64 w-52 flex-col overflow-x-auto whitespace-pre-wrap rounded-2xl border-none bg-gray-700 p-6">
+              <div className="scrollbar-hide flex h-64 w-52 flex-col overflow-x-auto whitespace-pre-wrap rounded-2xl border-none bg-gray-700 p-6">
                 {todosForDate.map((todo) => (
                   <div key={todo.id} className="mb-2 flex items-center gap-3">
                     <img className="w-4" src={fireIcon} />
