@@ -30,7 +30,7 @@ export default function GuestBook({ guestBook, username, userId }: IGuestBook) {
         />
         <span className="text-sm">{username}</span>
       </div>
-      <div className="mb-8 h-64 rounded-3xl border-none bg-gray-700 p-10 ">
+      <div className="mb-8 h-64 overflow-auto whitespace-pre-wrap rounded-3xl border-none bg-gray-700 p-10 scrollbar-hide">
         <span>{guestBook}</span>
       </div>
     </>
