@@ -3,6 +3,8 @@ import { IGuestBook } from "./GuestBookList";
 import {
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   getDocs,
   onSnapshot,
   orderBy,
@@ -44,6 +46,7 @@ export default function GuestBook({
 
   const [replyText, setReplyText] = useState("");
   const [replies, setReplies] = useState<IReply[]>([]);
+  const user = auth.currentUser;
 
   useEffect(() => {
     const q = query(
@@ -70,6 +73,40 @@ export default function GuestBook({
       photoURL: auth.currentUser?.photoURL,
     });
     setReplyText("");
+  };
+
+  const onDelete = async (replyId: string, replyUserId: string) => {
+    if (user?.uid !== replyUserId) {
+      alert("자신이 작성한 답글만 삭제할 수 있습니다.");
+      return;
+    }
+    const ok = confirm("정말로 삭제하시겠습니까?");
+    if (ok) {
+      try {
+        await deleteDoc(doc(db, "guestBook", id, "replies", replyId));
+      } catch (error) {
+        console.error(error);
+      } finally {
+        //
+      }
+    }
+  };
+
+  const onGuestBookDelete = async () => {
+    if (user?.uid !== userId) {
+      alert("자신이 작성한 답글만 삭제할 수 있습니다.");
+      return;
+    }
+    const ok = confirm("정말로 삭제하시겠습니까?");
+    if (ok) {
+      try {
+        await deleteDoc(doc(db, "guestBook", id));
+      } catch (error) {
+        console.error(error);
+      } finally {
+        //
+      }
+    }
   };
 
   useEffect(() => {
@@ -101,9 +138,16 @@ export default function GuestBook({
       <div>
         <div className="mb-4 flex w-64 flex-col gap-2 whitespace-pre-wrap break-all rounded-lg border-none bg-gray-700 p-3 pl-4 text-sm scrollbar-hide">
           <div>{guestBook}</div>
-          <span className="text-xs text-gray-400">{createdAtString}</span>
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-gray-400">{createdAtString}</span>
+            <div
+              onClick={onGuestBookDelete}
+              className="cursor-pointer text-red-600"
+            >
+              x
+            </div>
+          </div>
         </div>
-        {/* 여기에 Reply 렌더링 */}
         {replies.map((reply) => (
           <div className="ml-6 flex flex-col gap-2" key={reply.id}>
             <div className="flex items-center gap-2">
@@ -118,20 +162,27 @@ export default function GuestBook({
               />
               <span className="text-sm font-bold">{reply.username}</span>
             </div>
-            <p className="mb-4 flex w-64 flex-col gap-2 whitespace-pre-wrap break-all rounded-lg border-none bg-gray-500 p-3 pl-4 text-sm scrollbar-hide">
-              {reply.replyText}
-              <span className="text-xs text-gray-400">
-                {new Date(reply.createdAt).getFullYear()}.
-                {new Date(reply.createdAt).getMonth() + 1}.
-                {new Date(reply.createdAt).getDate()}{" "}
-                {new Date(reply.createdAt).getHours()}:
-                {("0" + new Date(reply.createdAt).getMinutes()).slice(-2)}
-              </span>
-            </p>
+            <div className="mb-4 flex w-64 flex-col gap-2 whitespace-pre-wrap break-all rounded-lg border-none bg-gray-500 p-3 pl-4 scrollbar-hide">
+              <p className="text-sm">{reply.replyText}</p>
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-gray-400">
+                  {new Date(reply.createdAt).getFullYear()}.
+                  {new Date(reply.createdAt).getMonth() + 1}.
+                  {new Date(reply.createdAt).getDate()}{" "}
+                  {new Date(reply.createdAt).getHours()}:
+                  {("0" + new Date(reply.createdAt).getMinutes()).slice(-2)}
+                </span>
+                <div
+                  onClick={() => onDelete(reply.id, reply.userId)}
+                  className="cursor-pointer text-red-600"
+                >
+                  x
+                </div>
+              </div>
+            </div>
           </div>
         ))}
       </div>
-      {/* 여기에 ReplyForm */}
       <form
         className="flex items-center gap-2"
         onSubmit={(e) => {
