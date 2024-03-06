@@ -4,11 +4,33 @@ import CompletedTodoListSection from "../components/CompletedTodoListSection";
 import GuestBookList from "../components/GuestBookList";
 import TodayTodoList from "../components/TodayTodoList";
 import { userNameState } from "../atoms/userState";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import fireIcon from "../images/fire.svg";
 
 export default function MyPage() {
   const setUserName = useSetRecoilState(userNameState);
+
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+  const [isDrag, setIsDrag] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [initialScrollLeft, setinitialScrollLeft] = useState(0);
+
+  const OnDragStart = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDrag(true);
+    setStartX(e.pageX);
+    setinitialScrollLeft(scrollRef.current?.scrollLeft || 0);
+  };
+
+  const OnDragEnd = () => {
+    setIsDrag(false);
+  };
+
+  const OnDragMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDrag || !scrollRef.current) return;
+    const diff = e.pageX - startX;
+    scrollRef.current.scrollLeft = initialScrollLeft - diff;
+  };
 
   useEffect(() => {
     setUserName("MyPage");
@@ -21,7 +43,7 @@ export default function MyPage() {
           <img className="w-8" src={fireIcon} />
           <h1 className="text-lg font-bold">TO-DO LIST</h1>
         </div>
-        <article className="scrollbar-hide flex overflow-x-auto py-2 pl-10">
+        <article className="flex overflow-x-auto py-2 pl-10 scrollbar-hide">
           <TodayTodoList />
         </article>
 
@@ -29,7 +51,7 @@ export default function MyPage() {
           <img className="w-8" src={fireIcon} />
           <h1 className="text-lg font-bold">COMPLETED LIST</h1>
         </div>
-        <article className="scrollbar-hide flex overflow-x-auto py-2 pl-10">
+        <article className="flex overflow-x-auto py-2 pl-10 scrollbar-hide">
           <CompletedTodoList />
         </article>
       </section>
@@ -39,7 +61,14 @@ export default function MyPage() {
           <h1 className="text-lg font-bold">COMPLETED LIST</h1>
           <span className="text-sm">by date</span>
         </div>
-        <article className="scrollbar-hide flex gap-6 overflow-x-auto px-10">
+        <article
+          ref={scrollRef}
+          onMouseDown={OnDragStart}
+          onMouseUp={OnDragEnd}
+          onMouseLeave={OnDragEnd}
+          onMouseMove={OnDragMove}
+          className="flex gap-6 overflow-x-auto px-10 scrollbar-hide"
+        >
           <CompletedTodoListSection />
         </article>
       </section>

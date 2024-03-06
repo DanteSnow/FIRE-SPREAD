@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { auth, db } from "../firebase";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { ITodo } from "../components/HomeCompletedTodoListSection";
 import UserTodayTodo from "../components/UserTodayTodo";
@@ -15,6 +15,28 @@ export default function UserPage() {
   const [todos, setTodos] = useState<ITodo[]>([]);
   const setUserName = useSetRecoilState(userNameState);
   const userName = useRecoilValue(userNameState);
+
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+  const [isDrag, setIsDrag] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [initialScrollLeft, setinitialScrollLeft] = useState(0);
+
+  const OnDragStart = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDrag(true);
+    setStartX(e.pageX);
+    setinitialScrollLeft(scrollRef.current?.scrollLeft || 0);
+  };
+
+  const OnDragEnd = () => {
+    setIsDrag(false);
+  };
+
+  const OnDragMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDrag || !scrollRef.current) return;
+    const diff = e.pageX - startX;
+    scrollRef.current.scrollLeft = initialScrollLeft - diff;
+  };
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -73,7 +95,7 @@ export default function UserPage() {
           <img className="w-8" src={fireIcon} />
           <h1 className="text-lg font-bold"> {userName}'s TO-DO LIST</h1>
         </div>
-        <article className="scrollbar-hide flex overflow-x-auto pl-10">
+        <article className="flex overflow-x-auto pl-10 scrollbar-hide">
           <div className="flex h-72 w-full flex-col gap-2 whitespace-pre-wrap">
             {todos.map((todo) => (
               <UserTodayTodo key={todo.id} {...todo} />
@@ -86,11 +108,18 @@ export default function UserPage() {
           <img className="w-8" src={fireIcon} />
           <h1 className="text-lg font-bold"> {userName}'s COMPLETED LIST</h1>
         </div>
-        <article className="scrollbar-hide flex gap-6 overflow-x-auto px-10">
+        <article
+          ref={scrollRef}
+          onMouseDown={OnDragStart}
+          onMouseUp={OnDragEnd}
+          onMouseLeave={OnDragEnd}
+          onMouseMove={OnDragMove}
+          className="flex gap-6 overflow-x-auto px-10 scrollbar-hide"
+        >
           {Object.entries(groupedTodos).map(([date, todosForDate]) => (
             <div key={date}>
               <h3 className="pb-2 pl-4 text-xl font-bold">{date}</h3>
-              <div className="scrollbar-hide flex h-64 w-52 flex-col overflow-x-auto whitespace-pre-wrap rounded-2xl border-none bg-gray-700 p-6">
+              <div className="flex h-64 w-52 flex-col overflow-x-auto whitespace-pre-wrap rounded-2xl border-none bg-gray-700 p-6 scrollbar-hide">
                 {todosForDate.map((todo) => (
                   <div key={todo.id} className="mb-2 flex items-center gap-3">
                     <img className="w-4" src={fireIcon} />

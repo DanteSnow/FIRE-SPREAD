@@ -90,11 +90,11 @@ export default function HomeTodayTodoList() {
   return (
     <>
       {Object.entries(groupedTodos).map(([name, todosForName]) => (
-        <div key={name}>
+        <div>
           <Link to={`/userpage/${todosForName[0].userId}`}>
             <div className="flex flex-col items-center gap-2">
               <img
-                className="h-9 w-9 cursor-pointer overflow-hidden rounded-full"
+                className="h-9 w-9 cursor-pointer rounded-full"
                 src={userProfiles[todosForName[0].userId] || defaultIcon}
                 alt={name}
               />
