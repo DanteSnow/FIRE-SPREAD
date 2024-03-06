@@ -34,7 +34,7 @@ export default function PostGuestBookForm({ userId }: { userId: string }) {
   return (
     <form onSubmit={onSubmit} className="relative flex flex-col gap-5 pt-10">
       <textarea
-        className="resize-none rounded-2xl border-none bg-gray-500 p-5"
+        className="resize-none rounded-2xl border-2 border-gray-400 bg-gray-500 p-5 focus:border-orange-400 focus:outline-none"
         placeholder="따뜻한 응원 한 마디 해주세요"
         value={guestBook}
         onChange={onChange}

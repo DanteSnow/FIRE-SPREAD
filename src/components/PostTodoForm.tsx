@@ -40,7 +40,7 @@ export default function PostTodoForm() {
       className="relative mt-5 flex w-full flex-col gap-3"
     >
       <textarea
-        className="relativ resize-none rounded-2xl border-none bg-gray-700 p-3"
+        className="relative resize-none rounded-2xl border-2 border-gray-500 bg-gray-700 p-3 focus:border-orange-400 focus:outline-none"
         placeholder="오늘의 할일은?"
         value={todo}
         onChange={onChange}
