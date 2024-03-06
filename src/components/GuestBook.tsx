@@ -140,12 +140,12 @@ export default function GuestBook({
         }}
       >
         <input
-          className="h-10 w-64 rounded-xl bg-gray-800"
+          className="h-10 w-52 rounded-xl bg-gray-800"
           type="text"
           value={replyText}
           onChange={(e) => setReplyText(e.target.value)}
         />
-        <button type="submit" className="rounded-xl bg-gray-700 p-2 text-xs">
+        <button type="submit" className="rounded-xl bg-gray-800 p-2 text-xs">
           Submit
         </button>
       </form>
