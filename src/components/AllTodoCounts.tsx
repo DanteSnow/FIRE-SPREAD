@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from "../firebase";
 import defaultIcon from "../images/user.svg";
+import { Link } from "react-router-dom";
 
 interface UserProfile {
   userId: string;
@@ -73,11 +74,18 @@ export default function AllTodoCounts() {
           key={userCount.username}
           className="flex items-center justify-between"
         >
-          <img
-            className="h-9 w-9 rounded-full"
-            src={userCount.photoURL || defaultIcon}
-            alt={userCount.username}
-          />
+          <Link to={`/userpage/${userCount.userId}`}>
+            <div className="flex flex-col items-center gap-1">
+              <img
+                className="h-9 w-9 rounded-full"
+                src={userCount.photoURL || defaultIcon}
+                alt={userCount.username}
+              />
+              <span className="max-w-9 overflow-hidden text-ellipsis whitespace-nowrap text-xs">
+                {userCount.username}
+              </span>
+            </div>
+          </Link>
           <div className="text-xs">
             <div className="flex items-center gap-2">
               <div className="h-3 w-3 rounded-full border-none bg-green-400" />
