@@ -48,7 +48,7 @@ export default function GuestBook({
   useEffect(() => {
     const q = query(
       collection(db, "guestBook", id, "replies"),
-      orderBy("createdAt", "desc"),
+      orderBy("createdAt", "asc"),
     );
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const repliesData = querySnapshot.docs.map((doc) => ({
@@ -86,7 +86,7 @@ export default function GuestBook({
 
   return (
     <>
-      <div className="mb-2">
+      <div className="mb-2 mt-9">
         <Link to={`/userpage/${userId}`}>
           <div className="flex items-center gap-2">
             <img
@@ -105,7 +105,7 @@ export default function GuestBook({
         </div>
         {/* 여기에 Reply 렌더링 */}
         {replies.map((reply) => (
-          <div className="flex flex-col gap-2" key={reply.id}>
+          <div className="ml-6 flex flex-col gap-2" key={reply.id}>
             <div className="flex items-center gap-2">
               <img
                 src={
@@ -133,18 +133,19 @@ export default function GuestBook({
       </div>
       {/* 여기에 ReplyForm */}
       <form
+        className="flex items-center gap-2"
         onSubmit={(e) => {
           e.preventDefault();
           submitReply();
         }}
       >
         <input
-          className="mb-8 h-10 w-64 rounded-xl bg-gray-800"
+          className="h-10 w-64 rounded-xl bg-gray-800"
           type="text"
           value={replyText}
           onChange={(e) => setReplyText(e.target.value)}
         />
-        <button type="submit" className="h-10 w-20 bg-gray-400">
+        <button type="submit" className="rounded-xl bg-gray-700 p-2 text-xs">
           Submit
         </button>
       </form>
