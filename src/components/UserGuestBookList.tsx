@@ -50,14 +50,13 @@ export default function UserGuestBookList({ userId }: { userId: string }) {
 
   return (
     <>
-      <div className="scrollbar-hide flex h-96 w-full flex-col overflow-auto whitespace-pre-wrap rounded-xl">
+      <div className="flex h-96 flex-col overflow-auto whitespace-pre-wrap scrollbar-hide">
         {guestBooks
           .filter((guestBook) => guestBook.receivedUserId === userId)
           .map((filteredGuestBook) => (
             <GuestBook key={filteredGuestBook.id} {...filteredGuestBook} />
           ))}
       </div>
-      <div className="mx-auto w-2/3 border-b-2 border-gray-500" />
       <PostGuestBookForm userId={userId as string} />
     </>
   );

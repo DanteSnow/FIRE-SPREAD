@@ -131,7 +131,7 @@ export default function UserPage() {
           ))}
         </article>
       </section>
-      <section className="mx-auto w-full">
+      <section>
         <div className="m-9 flex w-3/4 items-center gap-2 rounded-xl border-none bg-gray-500 p-4">
           <img className="w-8" src={fireIcon} />
           <h1 className="text-lg font-bold"> {userName}'s GUESTBOOK</h1>

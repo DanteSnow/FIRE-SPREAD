@@ -37,17 +37,17 @@ export default function TodoCounts({ userId }: TodoCountsProps) {
 
   return (
     <div className="flex w-3/4 justify-between">
-      <div className="flex flex-col justify-between">
+      <div className="flex flex-col justify-between gap-1">
         <div className="flex items-center gap-2">
           <div className="h-3 w-3 rounded-full border-none bg-green-400" />
           <p>In Progress</p>
         </div>
         <div className="flex items-center gap-2">
-          <div className="h-3 w-3 rounded-full border-none bg-orange-400" />
+          <div className="h-3 w-3 rounded-full border-none bg-red-500" />
           <p>Completed</p>
         </div>
       </div>
-      <div>
+      <div className="flex flex-col items-center justify-center gap-1">
         <p>{inProgressTodos}</p>
         <p>{completedTodos}</p>
       </div>

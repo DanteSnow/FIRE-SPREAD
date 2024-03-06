@@ -27,7 +27,7 @@ export default function MainLayout(): JSX.Element {
     <>
       <div className="flex h-screen w-screen items-center justify-center bg-gray-400">
         <div className="flex h-3/4 w-3/4 rounded-3xl text-white shadow-2xl">
-          <div className="flex flex-1 flex-col justify-between gap-2 rounded-l-3xl bg-gray-800 p-10">
+          <div className="flex flex-1 flex-col justify-between gap-3 rounded-l-3xl bg-gray-800 p-10">
             <MyProfile />
             <section className="flex justify-center">
               {currentUser && <TodoCounts userId={currentUser.uid} />}
