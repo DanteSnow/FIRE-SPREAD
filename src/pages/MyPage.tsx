@@ -1,5 +1,4 @@
 import { useSetRecoilState } from "recoil";
-import CompletedTodoList from "../components/CompletedTodoList";
 import CompletedTodoListSection from "../components/CompletedTodoListSection";
 import GuestBookList from "../components/GuestBookList";
 import TodayTodoList from "../components/TodayTodoList";
@@ -45,14 +44,6 @@ export default function MyPage() {
         </div>
         <article className="flex overflow-x-auto py-2 pl-10 scrollbar-hide">
           <TodayTodoList />
-        </article>
-
-        <div className="m-9 flex w-3/4 items-center gap-2 rounded-xl border-none bg-gray-500 p-4">
-          <img className="w-8" src={fireIcon} />
-          <h1 className="text-lg font-bold">COMPLETED LIST</h1>
-        </div>
-        <article className="flex overflow-x-auto py-2 pl-10 scrollbar-hide">
-          <CompletedTodoList />
         </article>
       </section>
       <section className="mx-auto w-full">

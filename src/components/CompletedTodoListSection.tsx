@@ -3,9 +3,11 @@ import { ITodo } from "./TodayTodoList";
 import { onAuthStateChanged } from "firebase/auth";
 import {
   collection,
+  doc,
   onSnapshot,
   orderBy,
   query,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import { auth, db } from "../firebase";
@@ -13,6 +15,23 @@ import fireIcon from "../images/fire.svg";
 
 export default function CompletedTodoListSection() {
   const [todos, setTodos] = useState<ITodo[]>([]);
+
+  const onCompleteCancel = async (id: string) => {
+    if (!id) return;
+    const ok = confirm("완료 일정을 취소하시겠습니까?");
+    if (ok) {
+      try {
+        await updateDoc(doc(db, "todo", id), {
+          complete: false,
+          completedAt: null,
+        });
+      } catch (error) {
+        console.error(error);
+      } finally {
+        //
+      }
+    }
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -74,10 +93,15 @@ export default function CompletedTodoListSection() {
       {Object.entries(groupedTodos).map(([date, todosForDate]) => (
         <div key={date}>
           <h3 className="pb-2 pl-4 text-xl font-bold">{date}</h3>
-          <div className="scrollbar-hide flex h-64 w-52 flex-col overflow-x-auto whitespace-pre-wrap rounded-3xl border-none bg-gray-700 p-6">
+          <div className="flex h-64 w-64 flex-col gap-2 overflow-x-auto whitespace-pre-wrap rounded-3xl border-none bg-gray-700 p-6 scrollbar-hide">
             {todosForDate.map((todo) => (
-              <div key={todo.id} className="mb-2 flex gap-2">
-                <img className="w-4" src={fireIcon} /> {todo.todo}
+              <div
+                onClick={() => onCompleteCancel(todo.id)}
+                key={todo.id}
+                className="mb-2 flex cursor-pointer gap-3 hover:text-orange-300"
+              >
+                <img className="w-4" src={fireIcon} />
+                <span className="text-sm">{todo.todo}</span>
               </div>
             ))}
           </div>
