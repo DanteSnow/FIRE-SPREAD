@@ -44,9 +44,9 @@ export default function TodayTodo({
       <div className="flex gap-2">
         <div
           onClick={onCompleted}
-          className="flex w-1/2 cursor-pointer items-center gap-3 rounded-2xl border-none bg-gray-700 px-7 py-2 transition-transform duration-300 hover:-translate-x-1 hover:-translate-y-1"
+          className="group flex w-1/2 cursor-pointer items-center gap-3 rounded-2xl border-none bg-gray-700 px-7 py-2 transition-transform duration-300 hover:-translate-x-1 hover:-translate-y-1 hover:text-orange-300"
         >
-          <div className="h-2 w-2 flex-shrink-0 rounded-full border-none bg-green-500" />
+          <div className="h-2 w-2 flex-shrink-0 rounded-full border-none bg-green-500  group-hover:bg-orange-300" />
           <span className="text-lg font-bold">{todo}</span>
         </div>
         <span className="flex items-end text-xs">{createdAt}</span>

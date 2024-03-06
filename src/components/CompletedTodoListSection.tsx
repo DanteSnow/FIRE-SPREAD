@@ -98,7 +98,7 @@ export default function CompletedTodoListSection() {
               <div
                 onClick={() => onCompleteCancel(todo.id)}
                 key={todo.id}
-                className="mb-2 flex cursor-pointer gap-3 hover:text-orange-300"
+                className="mb-2 flex cursor-pointer gap-3 transition-transform duration-300 hover:-translate-x-1 hover:-translate-y-1 hover:text-orange-300"
               >
                 <img className="w-4" src={fireIcon} />
                 <span className="text-sm">{todo.todo}</span>
