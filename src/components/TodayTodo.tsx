@@ -30,12 +30,16 @@ export default function TodayTodo({
 
   const onDelete = async () => {
     if (user?.uid !== userId) return;
-    try {
-      await deleteDoc(doc(db, "todo", id));
-    } catch (error) {
-      console.error(error);
-    } finally {
-      //
+
+    const ok = confirm("정말로 삭제하시겠습니까?");
+    if (ok) {
+      try {
+        await deleteDoc(doc(db, "todo", id));
+      } catch (error) {
+        console.error(error);
+      } finally {
+        //
+      }
     }
   };
 
