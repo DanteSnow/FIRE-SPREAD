@@ -90,16 +90,18 @@ export default function HomeTodayTodoList() {
   return (
     <>
       {Object.entries(groupedTodos).map(([name, todosForName]) => (
-        <Link to={`/userpage/${todosForName[0].userId}`} key={name}>
-          <div className="flex flex-col items-center gap-2">
-            <img
-              className="h-9 w-9 cursor-pointer overflow-hidden rounded-full"
-              src={userProfiles[todosForName[0].userId] || defaultIcon}
-              alt={name}
-            />
-            <h3 className="mb-3 text-center text-sm">{name}</h3>
-          </div>
-          <div className="scrollbar-hide flex h-64 w-52 flex-col overflow-x-auto rounded-3xl border-none bg-gray-700 p-6">
+        <div key={name}>
+          <Link to={`/userpage/${todosForName[0].userId}`}>
+            <div className="flex flex-col items-center gap-2">
+              <img
+                className="h-9 w-9 cursor-pointer overflow-hidden rounded-full"
+                src={userProfiles[todosForName[0].userId] || defaultIcon}
+                alt={name}
+              />
+              <h3 className="mb-3 text-center text-sm">{name}</h3>
+            </div>
+          </Link>
+          <div className="flex h-64 w-52 flex-col overflow-x-auto rounded-3xl border-none bg-gray-700 p-6 scrollbar-hide">
             {todosForName.map((todo) => (
               <div className="mb-2 flex gap-2" key={todo.id}>
                 <img className="w-4" src={fireIcon} />
@@ -107,7 +109,7 @@ export default function HomeTodayTodoList() {
               </div>
             ))}
           </div>
-        </Link>
+        </div>
       ))}
     </>
   );
