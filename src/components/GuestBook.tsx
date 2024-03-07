@@ -77,7 +77,7 @@ export default function GuestBook({
 
   const onDelete = async (replyId: string, replyUserId: string) => {
     if (user?.uid !== replyUserId) {
-      alert("자신이 작성한 답글만 삭제할 수 있습니다.");
+      alert("자신이 작성한 글만 삭제할 수 있습니다.");
       return;
     }
     const ok = confirm("정말로 삭제하시겠습니까?");
@@ -94,7 +94,7 @@ export default function GuestBook({
 
   const onGuestBookDelete = async () => {
     if (user?.uid !== userId) {
-      alert("자신이 작성한 답글만 삭제할 수 있습니다.");
+      alert("자신이 작성한 글만 삭제할 수 있습니다.");
       return;
     }
     const ok = confirm("정말로 삭제하시겠습니까?");
