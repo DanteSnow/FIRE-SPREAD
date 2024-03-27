@@ -36,8 +36,8 @@ export default function TodoCounts({ userId }: TodoCountsProps) {
   const inProgressTodos = todos.length - completedTodos;
 
   return (
-    <div className="flex w-3/4 justify-between">
-      <div className="flex flex-col justify-between gap-1">
+    <div className="mt-1 flex w-3/4 justify-between">
+      <div className="text- flex flex-col justify-between gap-1">
         <div className="flex items-center gap-2">
           <div className="h-3 w-3 rounded-full border-none bg-green-400" />
           <p>In Progress</p>
